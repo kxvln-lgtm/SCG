@@ -1,0 +1,16 @@
+dist/
+*.zip
+*.log
+.env
+node_modules/
+__pycache__/
+
+# Keep internal backups and audit evidence outside the public repository.
+docs/edge-before/
+docs/edge-before.zip
+docs/legacy-index.html
+docs/functions-before.json
+docs/policies-before.json
+docs/security-definer-current.json
+docs/validation.md
+*.patch

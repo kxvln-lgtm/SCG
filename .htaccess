@@ -1,0 +1,30 @@
+Options -Indexes
+DirectoryIndex index.html
+<IfModule mod_rewrite.c>
+ RewriteEngine On
+ # Keep the admin application on its dedicated origin.
+ RewriteCond %{HTTP_HOST} ^admin\.stagecraft\.kz$ [NC]
+ RewriteCond %{REQUEST_URI} !^/admin/
+ RewriteCond %{REQUEST_URI} !^/assets/
+ RewriteRule ^(?:index\.html)?$ admin/index.html [L]
+ # Old shared-host friendly routes.
+ RewriteRule ^backstage$ /backstage/ [R=302,L]
+ RewriteCond %{HTTP_HOST} !^admin\.stagecraft\.kz$ [NC]
+ RewriteRule ^admin(?:/.*)?$ https://admin.stagecraft.kz/ [R=302,L]
+ # Never serve source/configuration or archives from the website.
+ RewriteRule (^|/)(\.git|\.env|supabase|tests|scripts|docs|legacy|node_modules)(/|$) - [F,L]
+ RewriteRule \.(sql|log|zip|tar|gz|md|lock)$ - [F,L,NC]
+</IfModule>
+<FilesMatch "^(package.*\.json|.*\.map|.*\.bak|\.hosting.*)$">
+ Require all denied
+</FilesMatch>
+<IfModule mod_headers.c>
+ Header always set X-Content-Type-Options "nosniff"
+ Header always set Referrer-Policy "strict-origin-when-cross-origin"
+ Header always set X-Frame-Options "DENY"
+ Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+ Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://snmcoapfubdnvaoowjjk.supabase.co wss://snmcoapfubdnvaoowjjk.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+ <FilesMatch "\.(html|js|css|json)$">
+  Header set Cache-Control "no-cache"
+ </FilesMatch>
+</IfModule>

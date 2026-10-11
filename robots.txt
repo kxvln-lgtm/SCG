@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://scgkz.netlify.app/sitemap.xml
+Disallow: /backstage/
+Disallow: /admin/
+Disallow: /reset-password.html
+
+Sitemap: https://stagecraft.kz/sitemap.xml

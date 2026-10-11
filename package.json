@@ -1,0 +1,11 @@
+{
+  "name": "scg-platform",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "test": "node --test tests/*.test.js",
+    "check": "node --check assets/core.js && node --check assets/public.js && node --check assets/app.js && node --check assets/member.js && node --check assets/admin.js && node --check assets/auth.js"
+  }
+}
