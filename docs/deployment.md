@@ -13,7 +13,9 @@ Upload only the generated `dist` contents to the document root. Keep source arch
 
 Use server secrets for SMTP and the AI provider. Never place service keys, mailbox passwords or AI keys in frontend code. Configure authentication email delivery separately from the notification queue worker. Verify actual delivery and recovery redirects before marking mail complete.
 
-Admin operations require a TOTP session at AAL2. Regional operations remain restricted to the manager’s region. Security decisions are enforced by database policies and guarded functions, independently of the interface.
+Command Center accepts an authenticated session with an active server-assigned administrative role; TOTP enrollment is optional. Previously enrolled administrators are not forced through a second-factor challenge. Members who enabled TOTP still need their second factor. Regional operations remain restricted to the manager’s region. Security decisions are enforced by database policies and guarded functions, independently of the interface.
+
+Google sign-in uses Supabase's Google provider and the existing OAuth Web client. Its Client Secret stays in Supabase Auth settings. Allow `https://stagecraft.kz/backstage/` and `https://admin.stagecraft.kz/` as Supabase redirects, and `https://snmcoapfubdnvaoowjjk.supabase.co/auth/v1/callback` as the Google client's callback. Provider identities are linked by Supabase; the frontend never assigns administrative roles from Google profile metadata.
 
 ## Verification
 
