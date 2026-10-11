@@ -3,7 +3,6 @@ from pathlib import Path
 from html import escape
 from html.parser import HTMLParser
 import json
-import re
 import shutil
 import zipfile
 import xml.etree.ElementTree as ET
@@ -44,11 +43,14 @@ def write_catalog():
             paragraphs=[''.join(p.itertext()).strip() for p in xml.findall('.//w:p',ns)]
         catalog.append(dict(number=number,slug=slug,file=file,title=title,description=description,version='original-1',paragraphs=[p for p in paragraphs if p]))
     (ROOT/'assets/documents.json').write_text(json.dumps(catalog,ensure_ascii=False),encoding='utf-8')
-    legacy=(ROOT/'docs/legacy-index.html').read_text()
+    # The public repository builds from sanitized legal copy, not private backups.
+    legal_source=json.loads((ROOT/'assets/legal.json').read_text(encoding='utf-8'))
     legal={}
     for key in ['privacy','terms']:
-        section=re.search(r'<section id="'+key+r'"[\s\S]*?<div class="legal-text">([\s\S]*?)</section>',legacy).group(1)
-        parser=LegalSanitizer();parser.feed(section)
+        value=legal_source.get(key)
+        if not isinstance(value,str) or not value.strip():
+            raise ValueError('Missing legal copy: '+key)
+        parser=LegalSanitizer();parser.feed(value)
         legal[key]=''.join(parser.parts)
     (ROOT/'assets/legal.json').write_text(json.dumps(legal,ensure_ascii=False),encoding='utf-8')
 
