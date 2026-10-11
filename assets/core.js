@@ -3,7 +3,7 @@ export const CONFIG = Object.freeze({
   publishableKey: 'sb_publishable_xUhRuWKpfJ58JEiHu4ygHw_44etd9SJ',
   website: 'https://stagecraft.kz',
   admin: 'https://admin.stagecraft.kz',
-  version: '2.0.1',
+  version: '2.1.0',
   // Enable after the Google client secret and both redirects are verified.
   googleOAuthEnabled: false,
 });

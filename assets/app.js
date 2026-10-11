@@ -48,7 +48,7 @@ document.addEventListener('click',async e=>{
  e.preventDefault();
  try{
   if(action==='public-menu'){const nav=$('#public-nav');nav.classList.toggle('open');b.setAttribute('aria-expanded',String(nav.classList.contains('open')));}
-  else if(action==='workspace-menu'){const w=$('#workspace');w.classList.toggle('menu-open');b.setAttribute('aria-expanded',String(w.classList.contains('menu-open')));}
+  else if(action==='workspace-menu'){const w=$('#workspace');w.classList.toggle('menu-open');w.querySelectorAll('[data-action=workspace-menu]').forEach(control=>control.setAttribute('aria-expanded',String(w.classList.contains('menu-open'))));}
   else if(action==='refresh')await route();
   else if(action==='logout')await logout();
   else if(action==='toggle-password')togglePassword(b);
@@ -132,3 +132,6 @@ initCommon();
 await initAuth();
 if(auth.recovery)recoveryScreenLocked=true;
 await route();
+
+// Keep menu state and keyboard access in sync on both mobile surfaces.
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;const workspace=$('#workspace');if(workspace?.classList.contains('menu-open')){workspace.classList.remove('menu-open');workspace.querySelectorAll('[data-action=workspace-menu]').forEach(b=>b.setAttribute('aria-expanded','false'));$('.workspace-mobile')?.focus();}const nav=$('#public-nav');if(nav?.classList.contains('open')){nav.classList.remove('open');$('.public-mobile')?.setAttribute('aria-expanded','false');$('.public-mobile')?.focus();}});
