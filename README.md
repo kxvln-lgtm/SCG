@@ -51,3 +51,7 @@ Paid Telegram Gateway verification is disabled unless the owner explicitly sets 
 Plesk Git deployment is manual. Source was synchronized through the GitHub browser UI with owner approval after the integration denied write access. Review each production release before deployment; source synchronization and Hoster publication are separate actions.
 
 Free Let's Encrypt certificates cover the public site, www and admin hostname; the admin certificate expires on 9 January 2027 and auto-renews. HTTPS redirect is enabled for admin. Verify DNS and certificates separately. Never bypass certificate warnings. Current functional checks cover modules and database permissions; managed preview browser QA was unavailable, so mobile rendering and signed-in end-to-end flows require a later browser check. Security improvements do not constitute a guarantee against every attack. Leaked-password detection depends on the Supabase plan/settings and remains a separate check.
+
+## Visual system 2.1
+
+Apple-inspired light and dark surfaces: system typography, blue actions, centered SCG brand, frosted navigation, rounded cards, readable forms, and a mobile dock with safe-area spacing. The public site, Backstage, Command Center, documents, support, BO, and recovery share the same stylesheet. Navigation retains server-enforced permissions; the redesign does not change accounts or stored data.
