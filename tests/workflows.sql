@@ -3,6 +3,8 @@ select set_config('request.jwt.claims','{"role":"service_role"}',true);
 insert into auth.users(id,email,raw_user_meta_data,created_at,updated_at) values
  ('f4000000-0000-4000-8000-000000000001','scg-test-manager@invalid.test','{}',now(),now()),
  ('f4000000-0000-4000-8000-000000000002','scg-test-member@invalid.test','{}',now(),now());
+select set_config('scg.test.founder',(select id::text from public.profiles where role='FOUNDER' and status in ('активен','одобрено')),true);
+insert into auth.mfa_factors(id,user_id,friendly_name,factor_type,status,created_at,updated_at,secret) values('f4300000-0000-4000-8000-000000000001','f4000000-0000-4000-8000-000000000001','Rollback admin factor','totp','verified',now(),now(),'rollback-only');
 update public.profiles set role='STAFF',status='одобрено' where id='f4000000-0000-4000-8000-000000000001';
 update public.profiles set email_projects_enabled=true,email_support_enabled=true where id='f4000000-0000-4000-8000-000000000002';
 insert into public.projects(id,title,status,created_by) values('f4100000-0000-4000-8000-000000000001','SCG workflow test','open','f4000000-0000-4000-8000-000000000001');
@@ -11,11 +13,11 @@ select set_config('request.jwt.claims','{"role":"authenticated","sub":"f4000000-
 select public.scg_apply_project('f4100000-0000-4000-8000-000000000001');
 select public.scg_create_ticket('Workflow support','project','Test reply workflow');
 select public.scg_create_post('A rollback-only publication');
-select set_config('request.jwt.claims',jsonb_build_object('role','authenticated','sub',(select id from public.profiles where role='FOUNDER'),'aal','aal1')::text,true);
+select set_config('request.jwt.claims',jsonb_build_object('role','authenticated','sub',current_setting('scg.test.founder'),'aal','aal1')::text,true);
 do $$ begin
- begin perform public.scg_change_member_access('f4000000-0000-4000-8000-000000000002','VOLUNTEER',null,null,'одобрено');raise exception 'Founder access without MFA';exception when insufficient_privilege then null;end;
+ if not public.scg_change_member_access('f4000000-0000-4000-8000-000000000002','VOLUNTEER',null,null,'одобрено') then raise exception 'Founder AAL1 access denied';end if;
 end; $$;
-select set_config('request.jwt.claims','{"role":"authenticated","sub":"f4000000-0000-4000-8000-000000000001","aal":"aal2"}',true);
+select set_config('request.jwt.claims','{"role":"authenticated","sub":"f4000000-0000-4000-8000-000000000001","aal":"aal1"}',true);
 do $$ declare a uuid;t uuid;d uuid;scd text;begin
  select id into a from public.project_applications where project_id='f4100000-0000-4000-8000-000000000001';
  perform public.command_center_application_action(a,'approve','Volunteer');

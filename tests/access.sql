@@ -17,6 +17,7 @@ insert into public.projects(id,title,status,region,created_by) values
  ('f1000000-0000-4000-8000-000000000001','SCG test accepting','open','SCG_TEST_NORTH','f0000000-0000-4000-8000-000000000003'),
  ('f1000000-0000-4000-8000-000000000002','SCG test private','draft','SCG_TEST_SOUTH','f0000000-0000-4000-8000-000000000003');
 insert into public.notifications(id,user_id,title,body) values('f2000000-0000-4000-8000-000000000001','f0000000-0000-4000-8000-000000000002','test','test');
+insert into auth.mfa_factors(id,user_id,friendly_name,factor_type,status,created_at,updated_at,secret) values('f3000000-0000-4000-8000-000000000003','f0000000-0000-4000-8000-000000000003','Rollback admin factor','totp','verified',now(),now(),'rollback-only');
 set local role authenticated;
 select set_config('request.jwt.claims','{"role":"authenticated","sub":"f0000000-0000-4000-8000-000000000001","aal":"aal1"}',true);
 do $$ declare a uuid;t uuid;begin
@@ -37,8 +38,9 @@ do $$ declare t uuid;begin
  if exists(select 1 from public.scg_support_tickets where user_id='f0000000-0000-4000-8000-000000000001') then raise exception 'Cross-account support leak';end if;
  if exists(select 1 from public.project_applications where user_id='f0000000-0000-4000-8000-000000000001') then raise exception 'Cross-account application leak';end if;
 end; $$;
-select set_config('request.jwt.claims','{"role":"authenticated","sub":"f0000000-0000-4000-8000-000000000003","aal":"aal2"}',true);
+select set_config('request.jwt.claims','{"role":"authenticated","sub":"f0000000-0000-4000-8000-000000000003","aal":"aal1"}',true);
 do $$ begin
+ if not public.is_admin_user(auth.uid()) then raise exception 'Regional AAL1 admin denied';end if;
  if scg_private.manage_region('SCG_TEST_SOUTH') then raise exception 'Regional scope bypass';end if;
  if not scg_private.manage_region('SCG_TEST_NORTH') then raise exception 'Own region denied';end if;
  if exists(select 1 from public.resolve_scd_for_checkin(current_setting('scg.test.other_scd'))) then raise exception 'Check-in lookup leaks another region';end if;
