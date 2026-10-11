@@ -3,7 +3,9 @@ export const CONFIG = Object.freeze({
   publishableKey: 'sb_publishable_xUhRuWKpfJ58JEiHu4ygHw_44etd9SJ',
   website: 'https://stagecraft.kz',
   admin: 'https://admin.stagecraft.kz',
-  version: '2.0.0',
+  version: '2.0.1',
+  // Enable after the Google client secret and both redirects are verified.
+  googleOAuthEnabled: false,
 });
 
 export const $ = (selector, root = document) => root.querySelector(selector);
@@ -28,6 +30,8 @@ export function localDateTime(value) {
 export function kazakhTimestamp(value) { return value ? new Date(`${value}:00+05:00`).toISOString() : null; }
 export function errorText(error) {
   const message = String(error?.message || error || '');
+  if (/OAUTH_CANCELLED/i.test(message)) return 'Вход через Google не завершён. Попробуй снова или используй email и пароль.';
+  if (/provider.*(?:not enabled|disabled)|unsupported provider/i.test(message)) return 'Вход через Google пока недоступен. Используй email и пароль.';
   if (/Invalid login credentials/i.test(message)) return 'Email или пароль не совпадают.';
   if (/Email not confirmed/i.test(message)) return 'Сначала подтверди email по ссылке в письме.';
   if (/already registered|already been registered/i.test(message)) return 'Аккаунт с этим email уже существует. Войди или восстанови пароль.';

@@ -1,5 +1,5 @@
 import {$,CONFIG,esc,errorText,result,toast,icon,empty,loading,initCommon,closeDialog} from './core.js';
-import {auth,recoveryEntry,initAuth,onAuthChange,canAdmin,authCard,recoveryCard,submitAuth,submitRecovery,logout,togglePassword,mfaLoginCard,submitMfaLogin} from './auth.js';
+import {auth,recoveryEntry,initAuth,onAuthChange,canAdmin,authCard,recoveryCard,submitAuth,submitRecovery,logout,togglePassword,mfaLoginCard,submitMfaLogin,signInGoogle} from './auth.js';
 import {publicNav,publicFooter,homeMarkup,aboutMarkup,directionsMarkup,loadHomeProjects,documentsPage,legalPage,supportPublic,documents} from './public.js';
 import * as member from './member.js';
 import * as admin from './admin.js';
@@ -34,7 +34,6 @@ async function route(){
   if(!auth.profile){app.innerHTML=`<main class="public-page">${empty('Профиль пока недоступен','Попробуй обновить страницу. Если ситуация повторяется, обратись к команде SCG.','<button class="btn secondary" data-action="refresh">Обновить</button> <button class="btn secondary" data-action="logout">Выйти</button>','support')}</main>`;return;}
   if(surface==='admin'&&!canAdmin()){app.innerHTML=publicNav()+`<main class="public-page">${empty('Командный центр недоступен','Для аккаунта не назначена административная роль. Backstage доступен на основном сайте.',`<a class="btn primary" href="${CONFIG.website}/backstage/">Открыть Backstage ${icon('arrow')}</a>`,'shield')}</main>`;return;}
   const viewPage=['login','register','forgot'].includes(current)?surface==='admin'?'overview':'home':current;
-  if(surface==='admin'&&!auth.adminMfaReady){app.innerHTML=`<main class="recovery-layout"><section class="recovery-card"><span class="eyebrow">COMMAND CENTER / БЕЗОПАСНОСТЬ</span><h1>Защитим доступ.</h1><p>Для командного центра нужен двухэтапный вход. Подключи приложение аутентификатора и подтверди код.</p><button class="btn primary" data-action="mfa">Подключить аутентификатор ${icon('shield')}</button><p><a class="text-link" href="${CONFIG.website}/backstage/">Открыть Backstage →</a></p><button class="text-link" data-action="logout">Выйти из аккаунта</button></section></main>`;return;}
   app.innerHTML=member.workspaceShell(viewPage,surface==='admin');
   const out=$('#view');
   try{const content=await (surface==='admin'?admin.adminView(viewPage):member.memberView(viewPage));if(version!==generation||!out.isConnected)return;out.innerHTML=content;if(!['активен','одобрено'].includes(auth.profile.status))out.insertAdjacentHTML('afterbegin','<div class="notice">'+icon('shield')+'<span>Профиль ожидает решения команды. Документы и поддержка доступны; заявки на проекты откроются после одобрения.</span></div>');await member.updateUnread();if(viewPage==='feed')member.loadCommunities().catch(e=>showError($('#communities-list'),e));if(viewPage==='bo'){member.boStatus();}if(viewPage==='security'&&surface==='admin')admin.serviceStatuses();}
@@ -53,6 +52,7 @@ document.addEventListener('click',async e=>{
   else if(action==='refresh')await route();
   else if(action==='logout')await logout();
   else if(action==='toggle-password')togglePassword(b);
+  else if(action==='google-login')await signInGoogle(b,surface==='admin');
   else if(action==='theme'){const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;localStorage.setItem('scg-color-scheme',next);}
   else if(action==='project-filter')member.filterProjects(b.dataset.filter);
   else if(action==='project-detail')await member.projectDetail(id);
