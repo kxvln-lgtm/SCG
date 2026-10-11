@@ -16,7 +16,7 @@ Upload the contents of `dist` to `httpdocs`. The generated `scg-production.zip` 
 
 ## Access
 
-All command center users must enroll a TOTP authenticator. The server requires AAL2 for admin operations. Regional managers only manage their own region. PR manages content and announcements. Only the Founder changes member access. Profiles and identity documents are private; the public social profile API exposes a limited set of fields. Backend APIs must validate permissions independently of the browser.
+Command Center accepts an authenticated session with an active administrative role. TOTP enrollment is optional; previously enrolled administrators are not forced through a challenge. Members who enabled TOTP still need their second factor. Regional managers only manage their own region. PR manages content and announcements. Only the Founder changes member access. Profiles and identity documents are private; the public social profile API exposes a limited set of fields. Backend APIs must validate permissions independently of the browser.
 
 ## Domain email
 
