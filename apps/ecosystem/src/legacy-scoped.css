@@ -1,0 +1,830 @@
+/* SCG Apple-inspired design system */
+.legacy-admin *{box-sizing:border-box}
+.legacy-admin a{color:inherit;text-decoration:none}
+.legacy-admin button,.legacy-admin input,.legacy-admin select,.legacy-admin textarea{font:inherit}
+.legacy-admin button,.legacy-admin a,.legacy-admin input,.legacy-admin select,.legacy-admin textarea{-webkit-tap-highlight-color:transparent}
+.legacy-admin button{cursor:pointer}
+.legacy-admin button:disabled{cursor:wait;opacity:.6}
+.legacy-admin button{color:inherit}
+.legacy-admin img{max-width:100%;display:block}
+.legacy-admin svg{display:block}
+.legacy-admin h1,.legacy-admin h2,.legacy-admin h3,.legacy-admin h4,.legacy-admin p{margin:0}
+.legacy-admin h1,.legacy-admin h2,.legacy-admin h3{line-height:1.15;letter-spacing:-.045em}
+.legacy-admin h1{font-size:clamp(32px,4vw,52px);font-weight:800}
+.legacy-admin h2{font-size:clamp(26px,3vw,42px);font-weight:800}
+.legacy-admin h3{font-size:20px;font-weight:750}
+.legacy-admin p{color:var(--muted)}
+.legacy-admin small,.legacy-admin .small{font-size:12px;line-height:1.6}
+.legacy-admin .muted{color:var(--muted)}
+.legacy-admin .icon{width:20px;height:20px;flex-shrink:0}
+.legacy-admin .eyebrow{display:block;text-transform:uppercase;font-size:10px;line-height:1.8;font-weight:800;letter-spacing:.17em;color:var(--muted);margin-bottom:12px}
+.legacy-admin .section-label{display:flex;align-items:center;gap:14px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.legacy-admin .section-label:before{content:'';width:22px;height:2px;background:var(--red)}
+.legacy-admin .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:13px 21px;border:1px solid transparent;border-radius:9px;font-size:13px;font-weight:750;line-height:1.4;transition:background .2s,transform .2s,box-shadow .2s;white-space:nowrap;min-height:46px}
+.legacy-admin .btn:hover{transform:translateY(-1px)}
+.legacy-admin .btn.primary{background:var(--red);color:white}
+.legacy-admin .btn.primary:hover{background:#0077ed;box-shadow:0 6px 20px #0071e325}
+.legacy-admin .btn.secondary{background:var(--panel);border-color:var(--line);color:var(--ink)}
+.legacy-admin .btn.dark{background:#202427;color:white}
+.legacy-admin .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.legacy-admin .btn.light{background:white;color:#16191c}
+.legacy-admin .btn.small{font-size:12px;min-height:34px;padding:8px 12px;gap:7px}
+.legacy-admin .btn.danger{color:#c32a23;background:var(--red-soft);border-color:#0071e320}
+.legacy-admin .btn.full{width:100%}
+.legacy-admin .btn .icon{width:17px;height:17px}
+.legacy-admin .text-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:750;color:var(--muted)}
+.legacy-admin .text-link:hover{color:var(--red)}
+.legacy-admin .icon-btn{border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:10px;position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:40px;min-height:40px}
+.legacy-admin .icon-btn:hover{background:var(--bg)}
+.legacy-admin .skip-link{position:fixed;left:16px;top:-100px;background:white;color:black;padding:12px 20px;z-index:10000;border-radius:8px}
+.legacy-admin .skip-link:focus{top:12px}
+.legacy-admin :focus-visible{outline:3px solid #3e86d5;outline-offset:4px}
+.legacy-admin .brand{display:inline-flex;align-items:center;gap:12px}
+.legacy-admin .brand>span{font-family:var(--font);font-size:28px;line-height:1;font-weight:700;letter-spacing:-.08em}
+.legacy-admin .brand>small{font-size:8px;font-weight:800;letter-spacing:.17em;line-height:1.7;border-left:1px solid currentColor;padding-left:12px}
+.legacy-admin .brand>small span{display:block}
+.legacy-admin .public-nav{height:82px;display:flex;align-items:center;gap:24px;max-width:1360px;margin:auto;padding:0 48px;position:relative;z-index:5;background:var(--bg)}
+.legacy-admin .public-links{display:flex;align-items:center;gap:28px;margin-left:auto;font-size:12px;font-weight:750}
+.legacy-admin .public-links a{position:relative;padding:8px 0}
+.legacy-admin .public-links a:hover:after,.legacy-admin .public-links a[aria-current=page]:after{content:'';position:absolute;left:0;right:0;height:2px;bottom:0;background:var(--red)}
+.legacy-admin .public-mobile{display:none}
+.legacy-admin .public-account{display:flex;gap:12px;align-items:center}
+.legacy-admin .public-account .avatar{width:32px;height:32px;font-size:11px}
+.legacy-admin .landing-hero{color:white;background:#141719;position:relative;overflow:hidden;max-width:1440px;margin:0 auto;min-height:620px;display:grid;grid-template-columns:1.15fr 1fr;align-items:center;padding:68px 80px;gap:30px}
+.legacy-admin .hero-noise{pointer-events:none;position:absolute;inset:0;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23ffffff' filter='url(%23n)' d='M0 0h200v200H0z' opacity='.5'/%3E%3C/svg%3E")}
+.legacy-admin .hero-copy{position:relative;z-index:2}
+.legacy-admin .hero-copy .eyebrow{color:#a3aaa8;font-size:10px}
+.legacy-admin .hero-copy h1{font-size:clamp(48px,5vw,76px);line-height:1.055;font-weight:800;letter-spacing:-.07em;max-width:680px}
+.legacy-admin .hero-copy h1 em{font-style:normal;color:var(--red)}
+.legacy-admin .hero-copy p{margin-top:25px;font-size:14px;line-height:1.85;color:#a8aeb3;max-width:390px}
+.legacy-admin .hero-actions{display:flex;gap:12px;margin-top:32px}
+.legacy-admin .hero-caption{display:flex;align-items:center;gap:12px;margin-top:48px;font-size:9px;letter-spacing:.14em;color:#7c848a;font-weight:750}
+.legacy-admin .hero-caption:before{content:'';height:1px;width:44px;background:#525c60}
+.legacy-admin .stage-object{height:455px;position:relative;display:flex;align-items:center;justify-content:center;z-index:1;perspective:1200px}
+.legacy-admin .stage-orbit{border:1px solid #ffffff10;border-radius:50%;position:absolute;inset:0;transform:rotate(-30deg);background:radial-gradient(ellipse at 75% 65%,#0071e31c,transparent 65%)}
+.legacy-admin .stage-orbit:before,.legacy-admin .stage-orbit:after{content:'';position:absolute;border:1px solid #ffffff08;border-radius:50%;inset:40px}
+.legacy-admin .stage-orbit:after{inset:80px}
+.legacy-admin .backstage-pass{background:linear-gradient(130deg,#464b4e,#1c2023 55%,#292e32);width:292px;min-height:364px;border:1px solid #ffffff26;border-radius:18px;box-shadow:20px 30px 65px #0008,inset 0 1px 0 #fff2;padding:24px;color:#ecece6;position:relative;transform:rotate(9deg);transition:transform .6s}
+.legacy-admin .backstage-pass:hover{transform:rotate(4deg) translateY(-6px)}
+.legacy-admin .pass-notch{width:62px;height:9px;border-radius:6px;background:#101315;box-shadow:inset 0 1px 3px #000;position:absolute;top:15px;left:calc(50% - 31px)}
+.legacy-admin .pass-head{margin-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:8px;letter-spacing:.15em;font-weight:800}
+.legacy-admin .pass-head b{font-size:16px;letter-spacing:-.08em;font-family:var(--font)}
+.legacy-admin .pass-mark{font-size:88px;font-weight:800;letter-spacing:-.12em;margin:27px 0 20px;line-height:1;font-family:var(--font);color:var(--red)}
+.legacy-admin .pass-title{font-size:23px;font-weight:750;letter-spacing:-.045em;line-height:1.2;margin-bottom:20px}
+.legacy-admin .pass-foot{border-top:1px solid #ffffff20;padding-top:18px;display:flex;justify-content:space-between;gap:15px;font-size:8px;letter-spacing:.1em;line-height:1.8;color:#a5adaf}
+.legacy-admin .pass-foot span:last-child{font-weight:800;color:#fff}
+.legacy-admin .floating-note{position:absolute;bottom:35px;left:0;padding:12px 18px;border:1px solid #ffffff20;background:#1e2529de;backdrop-filter:blur(12px);color:#dfe4df;border-radius:8px;font-size:10px;display:flex;align-items:center;gap:9px;transform:rotate(-5deg)}
+.legacy-admin .status-dot{width:6px;height:6px;border-radius:50%;background:#74b699;display:inline-block;flex-shrink:0}
+.legacy-admin .hero-side-note{position:absolute;right:18px;top:50%;writing-mode:vertical-rl;color:#646d74;font-size:8px;font-weight:700;letter-spacing:.2em}
+.legacy-admin .hero-bottom{position:absolute;bottom:20px;left:80px;right:80px;display:flex;justify-content:space-between;font-size:8px;letter-spacing:.16em;color:#697177}
+.legacy-admin .ticker{display:flex;overflow:hidden;align-items:center;justify-content:space-around;gap:25px;background:var(--red);color:white;font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.17em;padding:16px 25px;max-width:1440px;margin:auto}
+.legacy-admin .ticker span{white-space:nowrap}
+.legacy-admin .ticker i{font-style:normal;opacity:.5}
+.legacy-admin .public-section{max-width:1240px;margin:0 auto;padding:92px 48px}
+.legacy-admin .public-section-header{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:35px}
+.legacy-admin .public-section-header h2{font-size:42px;margin-top:16px;max-width:650px}
+.legacy-admin .public-section-header p{max-width:360px;font-size:13px}
+.legacy-admin .public-about{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.legacy-admin .about-statement{font-size:clamp(26px,3vw,43px);font-weight:750;line-height:1.3;letter-spacing:-.055em;margin-top:22px}
+.legacy-admin .about-statement span{color:var(--muted)}
+.legacy-admin .about-copy{padding-top:48px}
+.legacy-admin .about-copy p{line-height:1.9;font-size:14px;max-width:460px}
+.legacy-admin .about-principles{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+.legacy-admin .about-principles span{padding:7px 12px;border:1px solid var(--line);border-radius:6px;font-size:10px;font-weight:750}
+.legacy-admin .public-divider{height:1px;background:var(--line);margin:0 48px}
+.legacy-admin .directions{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:36px}
+.legacy-admin .direction{padding:27px 20px 27px 0;border-bottom:1px solid var(--line);position:relative}
+.legacy-admin .direction+.direction{padding-left:24px;border-left:1px solid var(--line)}
+.legacy-admin .direction-number{font-size:9px;color:var(--red);font-weight:800;letter-spacing:.1em}
+.legacy-admin .direction h3{margin:24px 0 14px;font-size:24px}
+.legacy-admin .direction p{font-size:12px;line-height:1.8;min-height:70px}
+.legacy-admin .direction .icon{margin-top:22px;color:var(--red)}
+.legacy-admin .join-band{background:#16191c;color:white;max-width:1144px;margin:20px auto 80px;padding:45px 54px;display:flex;align-items:center;justify-content:space-between;gap:35px;border-radius:18px;position:relative;overflow:hidden}
+.legacy-admin .join-band .eyebrow{color:#979da3}
+.legacy-admin .join-band h2{font-size:38px;max-width:640px}
+.legacy-admin .join-band p{font-size:13px;margin-top:14px;color:#919b9d}
+.legacy-admin .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;counter-reset:steps;margin-top:36px}
+.legacy-admin .step{position:relative;border-top:1px solid var(--line);padding:25px 0}
+.legacy-admin .step h3{font-size:19px;margin:10px 0 14px}
+.legacy-admin .step>span{font-size:10px;letter-spacing:.1em;color:var(--red);font-weight:800}
+.legacy-admin .step p{font-size:12px;line-height:1.8}
+.legacy-admin .public-footer{max-width:1240px;margin:auto;padding:44px 48px 25px;border-top:1px solid var(--line)}
+.legacy-admin .footer-top{display:flex;justify-content:space-between;gap:36px;margin-bottom:40px}
+.legacy-admin .footer-top p{font-size:12px;max-width:230px;margin-top:15px}
+.legacy-admin .footer-links{display:flex;gap:50px}
+.legacy-admin .footer-links>div{display:grid;align-content:start;gap:9px;font-size:12px}
+.legacy-admin .footer-links b{font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;color:var(--muted)}
+.legacy-admin .footer-links a:hover{color:var(--red)}
+.legacy-admin .footer-bottom{display:flex;justify-content:space-between;gap:20px;font-size:9px;letter-spacing:.03em;color:var(--muted);padding-top:22px;border-top:1px solid var(--line)}
+.legacy-admin .public-page{max-width:1240px;margin:auto;padding:50px 48px 90px;min-height:65vh}
+
+/* Shared project and editorial layouts */
+.legacy-admin .project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.legacy-admin .project-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:box-shadow .2s,transform .2s}
+.legacy-admin .project-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.legacy-admin .project-cover{height:166px;position:relative;background:#22292c;overflow:hidden}
+.legacy-admin .project-cover>img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.legacy-admin .project-card:hover .project-cover>img{transform:scale(1.04)}
+.legacy-admin .project-cover-empty{display:flex;align-items:center;justify-content:center;height:100%;background:radial-gradient(ellipse at 75% 90%,#0071e330,transparent 75%),repeating-linear-gradient(105deg,transparent 0 35px,#ffffff05 35px 36px)}
+.legacy-admin .project-cover-empty span{color:#ffffff15;font-family:var(--font);font-size:62px;font-weight:700;letter-spacing:-.13em}
+.legacy-admin .project-cover .badge{position:absolute;left:15px;top:15px;font-size:9px}
+.legacy-admin .project-date-block{position:absolute;right:15px;bottom:15px;background:#ffffffed;color:#16191c;min-width:50px;min-height:56px;border-radius:6px;display:grid;place-content:center;text-align:center;padding:6px}
+.legacy-admin .project-date-block b{font-size:22px;line-height:1;font-weight:800;letter-spacing:-.05em}
+.legacy-admin .project-date-block span{font-size:8px;font-weight:800;letter-spacing:.05em;margin-top:4px}
+.legacy-admin .project-body{padding:22px}
+.legacy-admin .project-body .eyebrow{font-size:8px;margin-bottom:10px}
+.legacy-admin .project-body h3{font-size:21px;line-height:1.3;margin-bottom:10px}
+.legacy-admin .project-description{font-size:12px;line-height:1.75;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:43px;margin-bottom:17px}
+.legacy-admin .project-meta{display:flex;gap:7px;align-items:center;font-size:11px;color:var(--muted);margin-top:9px}
+.legacy-admin .project-meta .icon{width:14px;height:14px}
+.legacy-admin .project-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);margin-top:20px;padding-top:17px}
+.legacy-admin .project-footer>span{font-size:10px;color:var(--muted)}
+.legacy-admin .badge{display:inline-flex;gap:5px;align-items:center;white-space:nowrap;line-height:1.4;font-size:10px;font-weight:700;padding:5px 9px;border-radius:5px;background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.legacy-admin .badge-open,.legacy-admin .badge-approved,.legacy-admin .badge-completed,.legacy-admin .badge-resolved{background:var(--green-soft);color:var(--green);border-color:#27765e12}
+.legacy-admin .badge-pending,.legacy-admin .badge-new,.legacy-admin .badge-in_progress,.legacy-admin .badge-checked_in{background:#fff4de;color:#976519;border-color:#c38c1615}
+.legacy-admin .badge-rejected,.legacy-admin .badge-cancelled,.legacy-admin .badge-closed{background:var(--red-soft);color:#c5473e;border-color:#0071e310}
+.legacy-admin .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.legacy-admin .card-title{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:20px}
+.legacy-admin .card-title h2,.legacy-admin .card-title h3{font-size:17px;letter-spacing:-.03em}
+.legacy-admin .card-title .eyebrow{margin-bottom:2px;font-size:8px}
+.legacy-admin .card-title a{font-size:11px;font-weight:750;color:var(--muted)}
+.legacy-admin .toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:20px 0 26px}
+.legacy-admin .filter-tabs{display:flex;padding:4px;background:var(--panel);border:1px solid var(--line);border-radius:9px;gap:2px;max-width:100%;overflow-x:auto}
+.legacy-admin .filter-tabs button{border:0;border-radius:6px;background:transparent;min-height:35px;padding:8px 15px;font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+.legacy-admin .filter-tabs button.active{background:var(--red-soft);color:var(--red)}
+.legacy-admin .search-field{display:flex;align-items:center;gap:9px;position:relative}
+.legacy-admin .search-field>.icon{position:absolute;left:13px;width:16px;height:16px;color:var(--muted)}
+.legacy-admin .search-field input{padding-left:38px!important;min-width:210px}
+.legacy-admin .empty-state{background:var(--panel);border:1px dashed var(--line);border-radius:var(--radius);padding:42px 25px;text-align:center;grid-column:1/-1}
+.legacy-admin .empty-symbol{display:inline-grid;place-items:center;background:var(--bg);width:52px;height:52px;border-radius:13px;margin-bottom:18px;color:var(--muted)}
+.legacy-admin .empty-symbol .icon{width:24px;height:24px}
+.legacy-admin .empty-state h3{font-size:19px;margin-bottom:10px}
+.legacy-admin .empty-state p{font-size:12px;max-width:420px;margin:auto}
+.legacy-admin .empty-state .btn{margin-top:20px}
+.legacy-admin .loading-state{display:flex;align-items:center;justify-content:center;gap:12px;padding:50px;color:var(--muted);font-size:12px;grid-column:1/-1}
+.legacy-admin .spinner{display:block;width:18px;height:18px;border:2px solid var(--line);border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}
+}
+.legacy-admin .skeleton{border-radius:10px;height:100px;background:linear-gradient(90deg,var(--line),var(--panel),var(--line));background-size:200% 100%;animation:skeleton 1.8s infinite}
+@keyframes skeleton{to{background-position:-200% 0}
+}
+.legacy-admin .inline-error{padding:20px;border-radius:10px;background:var(--red-soft);color:#b73b32;font-size:12px;grid-column:1/-1}
+.legacy-admin .plain-text{white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink);font-size:13px;line-height:1.85}
+.legacy-admin .rich-description{font-size:14px;line-height:1.9;color:var(--muted);white-space:pre-wrap;margin:20px 0}
+.legacy-admin .details-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:25px 0}
+.legacy-admin .detail-item{padding:15px;border-radius:9px;background:var(--bg)}
+.legacy-admin .detail-item span{font-size:9px;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:.1em;font-weight:750;margin-bottom:5px}
+.legacy-admin .detail-item b{font-size:12px;font-weight:650}
+.legacy-admin .dialog-actions{display:flex;justify-content:flex-end;gap:10px;border-top:1px solid var(--line);margin-top:24px;padding-top:20px}
+
+/* Application shell */
+.legacy-admin .workspace{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh}
+.legacy-admin .sidebar{background:var(--nav);color:#eef0ee;position:fixed;top:0;bottom:0;left:0;width:232px;padding:31px 19px 20px;display:flex;flex-direction:column;z-index:20}
+.legacy-admin .sidebar .brand{padding-left:10px;margin-bottom:40px}
+.legacy-admin .sidebar .brand>span{font-size:27px}
+.legacy-admin .sidebar .brand small{font-size:7px;opacity:.8}
+.legacy-admin .sidebar-label{font-size:8px;font-weight:800;letter-spacing:.17em;color:#646e75;padding:0 12px;margin:16px 0 9px}
+.legacy-admin .sidebar-nav{display:grid;gap:5px}
+.legacy-admin .nav-link{display:flex;align-items:center;gap:12px;border:0;border-radius:8px;padding:11px 13px;font-size:12px;color:#919ba2;font-weight:650;background:transparent;text-align:left;position:relative}
+.legacy-admin .nav-link>.icon{width:18px;height:18px;color:#68757d}
+.legacy-admin .nav-link.active{color:white;background:#292f34}
+.legacy-admin .nav-link.active>.icon{color:var(--red)}
+.legacy-admin .nav-link.active:before{content:'';width:3px;height:16px;position:absolute;left:0;top:14px;border-radius:2px;background:var(--red)}
+.legacy-admin .nav-link:hover{color:white;background:#252a2e}
+.legacy-admin .nav-count{margin-left:auto;font-size:9px;min-width:18px;text-align:center;padding:1px 5px;border-radius:4px;background:#0071e325;color:#0071e3}
+.legacy-admin .sidebar-bottom{margin-top:auto;padding-top:25px}
+.legacy-admin .sidebar-bottom .nav-link{font-size:10px}
+.legacy-admin .sidebar-user{border-top:1px solid #ffffff10;display:flex;gap:10px;align-items:center;padding:18px 5px 0;margin-top:20px;overflow:hidden}
+.legacy-admin .sidebar-user .avatar{width:34px;height:34px;color:#e8ddd4;background:#353c40}
+.legacy-admin .sidebar-user b{font-size:11px;font-weight:750;display:block;max-width:128px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.legacy-admin .sidebar-user small{display:block;font-size:8px;color:#89969d;margin-top:2px}
+.legacy-admin .avatar{width:38px;height:38px;border-radius:50%;background:#ecebe3;color:#666b65;font-size:12px;font-weight:750;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;overflow:hidden}
+.legacy-admin .avatar img{width:100%;height:100%;object-fit:cover}
+.legacy-admin .avatar.large{width:80px;height:80px;font-size:25px}
+.legacy-admin .avatar.xlarge{width:104px;height:104px;font-size:32px}
+.legacy-admin .workspace-main{grid-column:2;min-width:0}
+.legacy-admin .workspace-topbar{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);padding:0 40px;background:var(--panel);position:sticky;top:0;z-index:10}
+.legacy-admin .topbar-breadcrumb{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:9px}
+.legacy-admin .topbar-breadcrumb b{color:var(--ink);font-weight:650}
+.legacy-admin .topbar-breadcrumb .icon{width:12px;height:12px}
+.legacy-admin .topbar-actions{display:flex;align-items:center;gap:10px}
+.legacy-admin .topbar-actions .icon-btn{border-color:transparent}
+.legacy-admin .topbar-actions .user-chip{display:flex;align-items:center;gap:9px;border-left:1px solid var(--line);padding-left:16px;margin-left:5px;font-size:11px;font-weight:750}
+.legacy-admin .unread-dot{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--red);right:9px;top:8px}
+.legacy-admin .workspace-content{padding:36px 40px 65px;max-width:1500px;margin:auto}
+.legacy-admin .workspace-mobile{display:none}
+.legacy-admin .page-heading{display:flex;align-items:center;justify-content:space-between;gap:25px;margin-bottom:30px}
+.legacy-admin .page-heading h1{font-size:33px;letter-spacing:-.055em;line-height:1.2}
+.legacy-admin .page-heading .eyebrow{font-size:8px;margin-bottom:6px}
+.legacy-admin .page-heading p{font-size:12px;line-height:1.8;margin-top:9px}
+.legacy-admin .heading-actions{display:flex;gap:9px;flex-shrink:0;align-items:center}
+.legacy-admin .welcome-card{background:#20272b;color:white;position:relative;padding:28px 32px;border-radius:var(--radius);display:flex;justify-content:space-between;gap:26px;align-items:center;overflow:hidden;margin-bottom:24px}
+.legacy-admin .welcome-card:after{content:'';position:absolute;right:-30px;top:-60px;width:250px;height:250px;border:1px solid #ffffff0b;border-radius:50%;box-shadow:0 0 0 40px #ffffff03,0 0 0 80px #ffffff02;pointer-events:none}
+.legacy-admin .welcome-card h2{font-size:27px;letter-spacing:-.045em}
+.legacy-admin .welcome-card .eyebrow{font-size:8px;color:#a4aea9;margin-bottom:8px}
+.legacy-admin .welcome-card p{font-size:12px;color:#abb4b7;max-width:460px;margin-top:10px}
+.legacy-admin .welcome-card .btn{position:relative;z-index:1}
+.legacy-admin .stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:26px}
+.legacy-admin .stat{padding:22px 23px;background:var(--panel);border:1px solid var(--line);border-radius:12px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.legacy-admin .stat b{font-size:29px;line-height:1;font-weight:750;letter-spacing:-.06em;display:block;margin-bottom:9px}
+.legacy-admin .stat span{font-size:10px;color:var(--muted);font-weight:650}
+.legacy-admin .stat-icon{width:34px;height:34px;display:grid;place-items:center;background:var(--bg);border-radius:9px;color:var(--muted)}
+.legacy-admin .stat-icon>.icon{width:17px;height:17px}
+.legacy-admin .dashboard-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:24px;align-items:start}
+.legacy-admin .dashboard-grid>.stack{display:grid;gap:24px}
+.legacy-admin .compact-project{display:flex;align-items:center;gap:14px;padding:17px 0;border-bottom:1px solid var(--line)}
+.legacy-admin .compact-project:last-child{border-bottom:0;padding-bottom:0}
+.legacy-admin .compact-date{background:var(--bg);border:1px solid var(--line);min-width:45px;min-height:48px;text-align:center;display:grid;place-content:center;border-radius:8px}
+.legacy-admin .compact-date b{font-size:17px;letter-spacing:-.04em;line-height:1.2}
+.legacy-admin .compact-date small{font-size:8px;text-transform:uppercase;color:var(--muted)}
+.legacy-admin .compact-project h3{font-size:13px;letter-spacing:-.02em;line-height:1.5}
+.legacy-admin .compact-project p{font-size:10px;margin-top:2px}
+.legacy-admin .compact-project>.icon-btn{margin-left:auto;border:0}
+.legacy-admin .compact-project .badge{margin-left:auto}
+.legacy-admin .mini-feed-item{padding:16px 0;border-bottom:1px solid var(--line)}
+.legacy-admin .mini-feed-item:last-child{border:0;padding-bottom:0}
+.legacy-admin .mini-feed-item>div{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.legacy-admin .mini-feed-item b{font-size:12px;font-weight:750}
+.legacy-admin .mini-feed-item small{font-size:8px;white-space:nowrap;color:var(--muted)}
+.legacy-admin .mini-feed-item p{font-size:11px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.legacy-admin .bo-promo{background:var(--red-soft);border-color:#0071e312}
+.legacy-admin .bo-promo .bo-mark{display:grid;place-items:center;width:42px;height:42px;background:var(--red);color:white;border-radius:10px;margin-bottom:17px}
+.legacy-admin .bo-promo h3{font-size:20px;margin-bottom:8px}
+.legacy-admin .bo-promo p{font-size:12px;line-height:1.8;margin-bottom:19px}
+.legacy-admin .notice{border:1px solid #efb64840;background:#fff8e8;color:#806128;padding:14px 17px;border-radius:10px;font-size:12px;line-height:1.75;margin-bottom:22px;display:flex;gap:12px;align-items:flex-start}
+.legacy-admin .notice .icon{margin-top:2px;width:18px;height:18px}
+.legacy-admin .notice a{text-decoration:underline;font-weight:700}
+.legacy-admin .workspace-footer{display:flex;justify-content:space-between;gap:20px;padding:20px 40px;border-top:1px solid var(--line);font-size:9px;color:var(--muted)}
+.legacy-admin .row{display:flex;align-items:center;gap:12px}
+.legacy-admin .stack{display:grid;gap:20px}
+.legacy-admin .two-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.legacy-admin .divider{height:1px;background:var(--line);margin:25px 0}
+.legacy-admin .body-copy{font-size:13px;line-height:1.9}
+.legacy-admin .metadata-row{display:flex;gap:15px;align-items:center;flex-wrap:wrap;font-size:10px;color:var(--muted)}
+.legacy-admin .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.legacy-admin table{border-collapse:collapse;width:100%;font-size:11px;text-align:left}
+.legacy-admin th{font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);background:var(--bg);font-weight:750;padding:14px 18px;white-space:nowrap}
+.legacy-admin td{padding:16px 18px;border-top:1px solid var(--line);vertical-align:middle}
+.legacy-admin td strong{display:block;font-size:11px;line-height:1.5;font-weight:750}
+.legacy-admin td small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.legacy-admin td .avatar{width:30px;height:30px;font-size:9px}
+.legacy-admin td .row-actions{display:flex;gap:5px;white-space:nowrap}
+.legacy-admin tr:hover td{background:var(--bg)}
+.legacy-admin .data-table-empty{padding:40px;text-align:center;color:var(--muted)}
+
+/* Forms, support, content and documents */
+.legacy-admin label{display:block;font-size:11px;font-weight:750;color:var(--ink);margin-bottom:18px}
+.legacy-admin label>input,.legacy-admin label>select,.legacy-admin label>textarea{margin-top:7px}
+.legacy-admin input:not([type=checkbox]):not([type=radio]),.legacy-admin select,.legacy-admin textarea{width:100%;padding:12px 13px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;font-size:12px;min-height:43px;line-height:1.5}
+.legacy-admin input::placeholder,.legacy-admin textarea::placeholder{color:#9b9d9f}
+.legacy-admin textarea{resize:vertical;min-height:112px}
+.legacy-admin input:focus,.legacy-admin select:focus,.legacy-admin textarea:focus{border-color:#839bae;outline:2px solid #839bae18;outline-offset:0}
+.legacy-admin .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.legacy-admin .form-grid>label{margin-bottom:5px}
+.legacy-admin .form-fieldset{border:0;padding:0;margin:0 0 22px}
+.legacy-admin .form-fieldset legend{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:15px}
+.legacy-admin .check-label{display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:10px;line-height:1.8}
+.legacy-admin .check-label input{margin:4px 0 0;accent-color:var(--red);width:15px;height:15px;flex-shrink:0}
+.legacy-admin .check-label a{color:var(--ink);text-decoration:underline}
+.legacy-admin .form-error{color:#c73d32;font-size:11px;line-height:1.7;margin-bottom:14px;white-space:pre-line}
+.legacy-admin .form-hint{color:var(--muted);font-size:10px;line-height:1.7;margin-top:5px;font-weight:500}
+.legacy-admin .form-actions{display:flex;gap:10px;align-items:center;padding-top:22px;border-top:1px solid var(--line);margin-top:20px}
+.legacy-admin .password-field{display:flex;align-items:center;position:relative;margin-top:7px}
+.legacy-admin .password-field input{padding-right:45px!important}
+.legacy-admin .password-field button{position:absolute;right:11px;background:transparent;border:0;color:var(--muted);padding:3px}
+.legacy-admin .password-field .icon{width:18px;height:18px}
+.legacy-admin .settings-row{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:18px 0;border-bottom:1px solid var(--line)}
+.legacy-admin .settings-row:last-child{border-bottom:0}
+.legacy-admin .settings-row h3{font-size:12px;line-height:1.5;letter-spacing:-.02em}
+.legacy-admin .settings-row p{font-size:10px;margin-top:3px;line-height:1.7}
+.legacy-admin .settings-row label{margin:0}
+.legacy-admin .switch{position:relative;display:block;width:34px;height:20px}
+.legacy-admin .switch input{opacity:0;position:absolute;width:100%;height:100%;margin:0;z-index:1;cursor:pointer}
+.legacy-admin .switch span{position:absolute;inset:0;background:#b6bab8;border-radius:12px;transition:background .2s}
+.legacy-admin .switch span:after{content:'';position:absolute;width:14px;height:14px;left:3px;top:3px;border-radius:50%;background:white;transition:transform .2s}
+.legacy-admin .switch input:checked+span{background:var(--red)}
+.legacy-admin .switch input:checked+span:after{transform:translateX(14px)}
+.legacy-admin .switch input:focus-visible+span{outline:3px solid #3e86d5;outline-offset:4px}
+.legacy-admin .profile-header{display:flex;align-items:center;gap:23px;margin-bottom:30px}
+.legacy-admin .profile-header h2{font-size:28px}
+.legacy-admin .profile-header p{font-size:12px;margin-top:9px}
+.legacy-admin .profile-header .metadata-row{margin-top:15px}
+.legacy-admin .id-card{background:#1c2529;border:1px solid #34404b;border-radius:16px;padding:26px;color:white;max-width:370px;position:relative;overflow:hidden}
+.legacy-admin .id-card:before{content:'SCG';position:absolute;bottom:-15px;right:-5px;font-size:120px;line-height:1;font-weight:800;letter-spacing:-.08em;color:#ffffff05}
+.legacy-admin .id-card .eyebrow{color:#8c9ea5;font-size:8px}
+.legacy-admin .id-card h3{font-size:24px;margin-bottom:6px}
+.legacy-admin .id-card p{font-size:11px;color:#95a3a7}
+.legacy-admin .id-card .scg-id-number{display:block;font-family:ui-monospace,monospace;font-size:20px;letter-spacing:.08em;border-top:1px solid #ffffff14;padding-top:20px;margin-top:27px;font-weight:600;color:#71b7ff}
+.legacy-admin .id-card-footer{display:flex;justify-content:space-between;font-size:8px;letter-spacing:.1em;margin-top:20px;color:#85969e}
+.legacy-admin .ticket-list{display:grid;gap:12px}
+.legacy-admin .ticket-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:18px;text-align:left;width:100%;transition:border .2s}
+.legacy-admin .ticket-card:hover{border-color:#bdc8c0}
+.legacy-admin .ticket-card h3{font-size:14px;line-height:1.5;letter-spacing:-.02em;margin-top:4px}
+.legacy-admin .ticket-card p{font-size:10px;margin-top:9px}
+.legacy-admin .ticket-card .eyebrow{font-size:7px;margin:0}
+.legacy-admin .support-faq details,.legacy-admin .faq-list details{border-bottom:1px solid var(--line);padding:17px 0}
+.legacy-admin .support-faq summary,.legacy-admin .faq-list summary{font-size:12px;font-weight:700;cursor:pointer;line-height:1.7}
+.legacy-admin .support-faq details p,.legacy-admin .faq-list details p{margin-top:12px;font-size:12px;line-height:1.9}
+.legacy-admin .conversation{display:grid;gap:18px;max-height:45vh;overflow-y:auto;padding:8px 3px 15px;margin-bottom:20px}
+.legacy-admin .message{padding:15px 18px;background:var(--bg);border:1px solid var(--line);border-radius:11px;max-width:94%}
+.legacy-admin .message.mine{justify-self:end;background:var(--red-soft);border-color:#0071e310}
+.legacy-admin .message header{display:flex;align-items:center;justify-content:space-between;gap:25px;margin-bottom:8px;font-size:9px;color:var(--muted)}
+.legacy-admin .message header b{font-weight:750;color:var(--ink)}
+.legacy-admin .message p{font-size:12px;color:var(--ink);white-space:pre-wrap;line-height:1.9;overflow-wrap:anywhere}
+.legacy-admin .documents-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.legacy-admin .document-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:23px;display:flex;flex-direction:column}
+.legacy-admin .document-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.legacy-admin .document-number{font-family:ui-monospace,monospace;font-size:11px;color:var(--muted)}
+.legacy-admin .document-type{font-size:7px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;padding:4px 7px;border-radius:4px;background:var(--bg);color:var(--muted)}
+.legacy-admin .document-card h3{font-size:19px;line-height:1.35;margin-bottom:10px}
+.legacy-admin .document-card p{font-size:11px;line-height:1.8;margin-bottom:21px;flex:1}
+.legacy-admin .document-card-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:15px;font-size:10px;font-weight:750;gap:10px}
+.legacy-admin .document-card-bottom a{color:var(--muted)}
+.legacy-admin .document-card-bottom button{border:0;background:transparent;padding:0;color:var(--ink);font-size:11px;font-weight:750;display:flex;align-items:center;gap:7px}
+.legacy-admin .document-card-bottom .icon{width:15px;height:15px}
+.legacy-admin .document-reader{max-height:55vh;overflow:auto;line-height:1.85;padding-right:10px}
+.legacy-admin .document-reader h3{font-size:13px;line-height:1.7;letter-spacing:-.01em;margin-top:22px;margin-bottom:10px}
+.legacy-admin .document-reader p{color:var(--ink);font-size:12px;margin-bottom:10px}
+.legacy-admin .document-search{margin-bottom:25px}
+.legacy-admin .legal-page{max-width:800px;margin:auto;line-height:1.95}
+.legacy-admin .legal-page h1{margin-bottom:30px}
+.legacy-admin .legal-page h3{font-size:19px;margin:32px 0 14px;line-height:1.5}
+.legacy-admin .legal-page p,.legacy-admin .legal-page li{font-size:13px;color:var(--muted)}
+.legacy-admin .legal-page p+p{margin-top:15px}
+.legacy-admin .feed-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(230px,1fr);gap:24px;align-items:start}
+.legacy-admin .feed-list{display:grid;gap:20px}
+.legacy-admin .post{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:25px}
+.legacy-admin .post-header{display:flex;align-items:center;gap:11px;margin-bottom:20px}
+.legacy-admin .post-header h3{font-size:12px;line-height:1.6;letter-spacing:0}
+.legacy-admin .post-header small{font-size:9px;color:var(--muted);display:block}
+.legacy-admin .post-header .post-menu{margin-left:auto}
+.legacy-admin .post h2{font-size:22px;margin-bottom:15px}
+.legacy-admin .post p{font-size:13px;line-height:1.85;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
+.legacy-admin .post-media{border-radius:10px;width:100%;max-height:460px;object-fit:cover;margin-top:18px}
+.legacy-admin .post-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:15px;margin-top:20px;font-size:10px;color:var(--muted)}
+.legacy-admin .post-actions button{border:0;background:transparent;display:flex;align-items:center;gap:6px;color:var(--muted);font-size:11px;padding:4px 0}
+.legacy-admin .post-actions button.liked{color:var(--red)}
+.legacy-admin .post-actions .icon{width:16px;height:16px}
+.legacy-admin .composer{margin-bottom:22px}
+.legacy-admin .composer textarea{min-height:90px}
+.legacy-admin .composer-actions{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.legacy-admin .composer-actions span{font-size:10px;color:var(--muted)}
+.legacy-admin .notification-list{display:grid;gap:13px}
+.legacy-admin .notification-card{display:flex;gap:16px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
+.legacy-admin .notification-card.unread{border-left:3px solid var(--red)}
+.legacy-admin .notification-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--bg);color:var(--muted);flex-shrink:0}
+.legacy-admin .notification-card h3{font-size:13px;line-height:1.6;letter-spacing:-.01em}
+.legacy-admin .notification-card p{font-size:12px;white-space:pre-wrap;line-height:1.8;margin-top:6px}
+.legacy-admin .notification-card small{font-size:9px;color:var(--muted);display:block;margin-top:10px}
+.legacy-admin .notification-card button{margin-left:auto;flex-shrink:0}
+.legacy-admin .kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;align-items:start}
+.legacy-admin .kanban-column{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;min-height:220px}
+.legacy-admin .kanban-title{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:750;margin-bottom:17px;gap:10px}
+.legacy-admin .kanban-title small{color:var(--muted);font-size:9px;font-weight:500}
+.legacy-admin .draft-card{background:var(--panel);border:1px solid var(--line);padding:15px;border-radius:9px;margin-bottom:10px;display:block;width:100%;text-align:left}
+.legacy-admin .draft-card h3{font-size:12px;line-height:1.6;letter-spacing:0}
+.legacy-admin .draft-card p{font-size:10px;margin-top:8px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.legacy-admin .draft-card small{display:block;margin-top:13px;font-size:8px;color:var(--muted)}
+.legacy-admin .security-checks{display:grid;gap:12px}
+.legacy-admin .security-check{display:flex;gap:12px;align-items:flex-start;padding:15px;background:var(--bg);border-radius:8px}
+.legacy-admin .security-check>.icon{color:var(--green);width:18px;height:18px;margin-top:2px}
+.legacy-admin .security-check b{font-size:12px;display:block}
+.legacy-admin .security-check p{font-size:10px;line-height:1.8;margin-top:4px}
+.legacy-admin .bo-layout{display:grid;grid-template-columns:240px minmax(0,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-height:530px;background:var(--panel)}
+.legacy-admin .bo-sidebar{border-right:1px solid var(--line);padding:22px;background:var(--bg)}
+.legacy-admin .bo-sidebar .btn{width:100%}
+.legacy-admin .bo-sidebar>.eyebrow{margin-top:30px;font-size:8px}
+.legacy-admin .bo-history{display:grid;gap:6px}
+.legacy-admin .bo-history button{border:0;background:transparent;font-size:11px;color:var(--muted);text-align:left;padding:9px 10px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;display:block;max-width:100%;border-radius:6px}
+.legacy-admin .bo-history button.active,.legacy-admin .bo-history button:hover{background:var(--panel);color:var(--ink)}
+.legacy-admin .bo-main{display:flex;flex-direction:column;min-width:0}
+.legacy-admin .bo-messages{height:450px;overflow-y:auto;padding:30px;display:grid;align-content:start;gap:18px}
+.legacy-admin .bo-welcome{margin:auto;text-align:center;max-width:460px;padding:30px 10px}
+.legacy-admin .bo-welcome>.bo-symbol{display:inline-flex;padding:16px;border-radius:16px;background:var(--red-soft);color:var(--red);margin-bottom:22px}
+.legacy-admin .bo-symbol>.icon{width:28px;height:28px}
+.legacy-admin .bo-welcome h2{font-size:29px;margin-bottom:13px}
+.legacy-admin .bo-welcome p{font-size:12px;line-height:1.9}
+.legacy-admin .bo-prompts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
+.legacy-admin .bo-prompts button{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:10px 12px;font-size:10px;color:var(--muted)}
+.legacy-admin .bo-input{margin:auto 25px 18px;padding-top:20px;border-top:1px solid var(--line)}
+.legacy-admin .bo-input>div{display:flex;gap:10px;align-items:flex-end}
+.legacy-admin .bo-input textarea{min-height:45px;max-height:140px;resize:none;margin:0}
+.legacy-admin .bo-input .btn{padding:13px;min-height:45px}
+.legacy-admin .bo-input>p{font-size:8px;margin-top:10px;line-height:1.7}
+.legacy-admin .bo-message{display:flex;gap:12px;align-items:flex-start}
+.legacy-admin .bo-message>.bo-avatar{display:flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--red-soft);border-radius:8px;color:var(--red);flex-shrink:0}
+.legacy-admin .bo-message>.bo-avatar>.icon{width:15px;height:15px}
+.legacy-admin .bo-message.mine{flex-direction:row-reverse}
+.legacy-admin .bo-message>p{padding:13px 15px;border-radius:10px;background:var(--bg);font-size:12px;line-height:1.9;white-space:pre-wrap;color:var(--ink);overflow-wrap:anywhere;max-width:90%}
+.legacy-admin .bo-message.mine>p{background:var(--red-soft)}
+.legacy-admin .certificate-preview{padding:45px 35px;text-align:center;border:1px solid var(--line);background:white;color:#16191c}
+.legacy-admin .certificate-preview .eyebrow{font-size:9px;color:#656c73}
+.legacy-admin .certificate-preview h2{font-size:27px;margin:20px 0}
+.legacy-admin .certificate-preview h3{font-size:24px;line-height:1.5}
+.legacy-admin .certificate-preview p{font-size:13px;color:#656c73;margin:12px 0}
+.legacy-admin .certificate-preview .certificate-number{display:block;font-size:10px;letter-spacing:.12em;color:#0071e3;margin-top:28px}
+
+/* Authentication, overlays and adaptation */
+.legacy-admin .auth-layout{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 82px)}
+.legacy-admin .auth-intro{padding:85px 70px;background:#171d21;color:white;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.legacy-admin .auth-intro .eyebrow{color:#7e8c94}
+.legacy-admin .auth-intro h1{font-size:clamp(38px,4vw,62px);line-height:1.15;position:relative;z-index:1}
+.legacy-admin .auth-intro p{font-size:13px;color:#8e9a9f;max-width:370px;margin-top:27px;position:relative;z-index:1}
+.legacy-admin .intro-mark{position:absolute;font-family:var(--font);bottom:-30px;left:20px;font-size:220px;line-height:1;color:#ffffff03;letter-spacing:-.13em}
+.legacy-admin .auth-panel{padding:35px 50px;display:flex;flex-direction:column;justify-content:center;background:var(--panel)}
+.legacy-admin .auth-panel>.text-link{margin-bottom:30px;align-self:flex-start}
+.legacy-admin .auth-form-wrap{width:100%;max-width:360px;margin:auto}
+.legacy-admin .auth-form-wrap>.eyebrow{font-size:9px}
+.legacy-admin .auth-form-wrap h2{font-size:31px;line-height:1.3}
+.legacy-admin .auth-form-wrap>.muted{font-size:12px;line-height:1.8;margin:15px 0 28px}
+.legacy-admin .auth-links{display:flex;justify-content:space-between;gap:15px;font-size:10px;color:var(--muted);margin-top:22px}
+.legacy-admin .auth-links a{font-weight:750;color:var(--ink)}
+.legacy-admin .auth-links a:hover{color:var(--red)}
+.legacy-admin .auth-security{display:flex;align-items:center;justify-content:center;gap:6px;border-top:1px solid var(--line);margin-top:32px;padding-top:23px;font-size:8px;color:var(--muted)}
+.legacy-admin .auth-security>.icon{width:12px;height:12px}
+.legacy-admin .success-panel{text-align:center;padding:20px 0}
+.legacy-admin .success-panel>.icon{width:45px;height:45px;margin:0 auto 20px;color:var(--green)}
+.legacy-admin .success-panel h3{font-size:23px;margin-bottom:15px}
+.legacy-admin .success-panel p{font-size:12px;line-height:1.9}
+.legacy-admin .success-panel .btn{margin-top:20px}
+.legacy-admin .recovery-layout{min-height:100vh;padding:45px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px}
+.legacy-admin .recovery-card{max-width:450px;width:100%;padding:37px;background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.legacy-admin .recovery-card h1{font-size:30px;line-height:1.2}
+.legacy-admin .recovery-card>p{font-size:12px;line-height:1.9;margin:18px 0 25px}
+.legacy-admin .recovery-card>.small{font-size:10px;margin-bottom:0}
+.legacy-admin .toast-stack{position:fixed;right:24px;bottom:24px;z-index:1000;display:grid;gap:9px;max-width:min(420px,calc(100vw - 48px))}
+.legacy-admin .toast{background:#1f2a27;color:#fff;font-size:12px;line-height:1.65;box-shadow:0 8px 30px #0002;border-radius:10px;padding:15px 19px;border:1px solid #ffffff10}
+.legacy-admin .toast.error{background:#842f2b}
+.legacy-admin dialog{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:18px;padding:0;width:min(680px,calc(100vw - 32px));max-height:90vh;box-shadow:0 25px 100px #0003}
+.legacy-admin dialog::backdrop{background:#0c131bb3;backdrop-filter:blur(4px)}
+.legacy-admin .dialog-header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 28px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel);z-index:2}
+.legacy-admin .dialog-header h2{font-size:20px;line-height:1.4;letter-spacing:-.025em}
+.legacy-admin .dialog-header .icon-btn{border:0;padding:5px;min-width:30px;min-height:30px}
+.legacy-admin .dialog-content{padding:26px 28px;overflow:auto}
+.legacy-admin .public-subtitle{margin-top:20px;max-width:590px;font-size:14px;line-height:1.9}
+.legacy-admin .support-callout{padding:30px;background:var(--panel);border:1px solid var(--line);border-radius:15px;display:flex;align-items:center;justify-content:space-between;gap:25px;margin-top:36px}
+.legacy-admin .support-callout h3{font-size:22px;margin-bottom:12px}
+.legacy-admin .support-callout p{font-size:12px;max-width:500px}
+.legacy-admin .community-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.legacy-admin .community-card{display:flex;flex-direction:column;gap:15px}
+.legacy-admin .community-card>span{font-family:var(--font);font-size:20px;color:var(--red)}
+.legacy-admin .community-card h3{font-size:20px}
+.legacy-admin .community-card p{font-size:12px;line-height:1.9;flex:1}
+.legacy-admin .community-card .btn{align-self:flex-start}
+.legacy-admin .only-mobile{display:none}
+.legacy-admin .mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.legacy-admin .nowrap{white-space:nowrap}
+.legacy-admin .footer-note{font-size:10px;color:var(--muted);line-height:1.8;margin-top:20px}
+.legacy-admin .danger-text{color:var(--red)}
+.legacy-admin .help-row{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px;border:1px solid var(--line);border-radius:11px;margin-top:12px;font-size:12px}
+
+@media(min-width:1500px){.legacy-admin .landing-hero{border-radius:18px}
+.legacy-admin .ticker{border-radius:0 0 12px 12px}
+}
+
+@media(max-width:1150px){.legacy-admin .public-nav{padding:0 30px}
+.legacy-admin .public-links{gap:20px}
+.legacy-admin .landing-hero{padding:60px 45px;min-height:590px;grid-template-columns:1.1fr 1fr}
+.legacy-admin .hero-copy h1{font-size:60px}
+.legacy-admin .backstage-pass{width:260px;min-height:345px}
+.legacy-admin .hero-bottom{left:45px;right:45px}
+.legacy-admin .public-section{padding:75px 35px}
+.legacy-admin .public-page{padding:45px 35px 75px}
+.legacy-admin .join-band{margin:10px 35px 60px}
+.legacy-admin .workspace{grid-template-columns:205px minmax(0,1fr)}
+.legacy-admin .sidebar{width:205px;padding:28px 15px}
+.legacy-admin .workspace-content{padding:30px 28px 60px}
+.legacy-admin .workspace-topbar{padding:0 28px}
+.legacy-admin .workspace .project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.legacy-admin .workspace .documents-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.legacy-admin .workspace .community-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.legacy-admin .stats-grid{gap:12px}
+.legacy-admin .stat{padding:19px 16px}
+.legacy-admin .stat b{font-size:26px}
+.legacy-admin .stat-icon{width:30px;height:30px}
+.legacy-admin .dashboard-grid{grid-template-columns:minmax(0,1.45fr) minmax(240px,1fr);gap:18px}
+.legacy-admin .kanban{grid-template-columns:repeat(2,1fr)}
+.legacy-admin .auth-intro{padding:70px 45px}
+}
+
+@media(max-width:900px){.legacy-admin .public-links{display:none}
+.legacy-admin .public-account{margin-left:auto}
+.legacy-admin .public-mobile{display:inline-flex}
+.legacy-admin .public-nav.open .public-links{display:grid;position:absolute;top:75px;left:20px;right:20px;padding:20px;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:10px;gap:4px}
+.legacy-admin .landing-hero{padding:60px 34px;grid-template-columns:1.05fr 1fr;min-height:530px;gap:5px}
+.legacy-admin .hero-copy h1{font-size:50px}
+.legacy-admin .hero-copy p{font-size:12px}
+.legacy-admin .hero-actions{gap:9px;flex-wrap:wrap;margin-top:25px}
+.legacy-admin .hero-actions .btn{font-size:11px;padding:12px 16px}
+.legacy-admin .stage-object{height:390px}
+.legacy-admin .backstage-pass{width:229px;min-height:321px;padding:20px}
+.legacy-admin .pass-mark{font-size:73px}
+.legacy-admin .pass-title{font-size:20px}
+.legacy-admin .floating-note{left:-5px;bottom:15px;font-size:8px;padding:10px 12px}
+.legacy-admin .hero-bottom{left:34px;right:34px}
+.legacy-admin .hero-caption{font-size:7px}
+.legacy-admin .public-section-header h2{font-size:34px}
+.legacy-admin .public-about{gap:35px}
+.legacy-admin .about-copy{padding-top:45px}
+.legacy-admin .directions{grid-template-columns:repeat(2,1fr)}
+.legacy-admin .direction:nth-child(3){border-left:0;padding-left:0}
+.legacy-admin .direction{padding-right:25px}
+.legacy-admin .direction p{min-height:45px}
+.legacy-admin .project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.legacy-admin .documents-grid{grid-template-columns:repeat(2,1fr)}
+.legacy-admin .public-footer{padding:35px}
+.legacy-admin .join-band{padding:35px}
+.legacy-admin .join-band h2{font-size:30px}
+.legacy-admin .workspace{grid-template-columns:185px minmax(0,1fr)}
+.legacy-admin .sidebar{width:185px;padding:27px 11px}
+.legacy-admin .nav-link{font-size:11px;padding:11px 10px;gap:9px}
+.legacy-admin .sidebar-user{gap:7px}
+.legacy-admin .sidebar-user b{max-width:100px;font-size:9px}
+.legacy-admin .sidebar .brand{gap:8px}
+.legacy-admin .sidebar .brand>span{font-size:23px}
+.legacy-admin .sidebar .brand small{font-size:6px;padding-left:8px}
+.legacy-admin .workspace-content{padding:27px 22px 55px}
+.legacy-admin .workspace-topbar{padding:0 22px;height:68px}
+.legacy-admin .page-heading h1{font-size:29px}
+.legacy-admin .page-heading{align-items:flex-start;gap:15px}
+.legacy-admin .heading-actions{flex-wrap:wrap;justify-content:flex-end}
+.legacy-admin .heading-actions .btn{font-size:10px;padding:11px 13px}
+.legacy-admin .dashboard-grid{grid-template-columns:1fr}
+.legacy-admin .stats-grid{grid-template-columns:repeat(2,1fr)}
+.legacy-admin .workspace .project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.legacy-admin .project-body{padding:18px}
+.legacy-admin .project-body h3{font-size:18px}
+.legacy-admin .project-footer .btn{font-size:10px}
+.legacy-admin .welcome-card{padding:25px}
+.legacy-admin .welcome-card h2{font-size:24px}
+.legacy-admin .welcome-card .btn{font-size:10px}
+.legacy-admin .two-cols{grid-template-columns:1fr}
+.legacy-admin .feed-layout{grid-template-columns:1fr}
+.legacy-admin .bo-layout{grid-template-columns:180px minmax(0,1fr)}
+.legacy-admin .bo-sidebar{padding:16px}
+.legacy-admin .bo-messages{padding:20px}
+.legacy-admin .bo-input{margin:0 18px 18px}
+.legacy-admin .auth-form-wrap h2{font-size:27px}
+.legacy-admin .auth-panel{padding:35px}
+.legacy-admin .auth-intro{padding:55px 35px}
+.legacy-admin .auth-intro h1{font-size:38px}
+}
+
+@media(max-width:700px){.legacy-admin .public-nav{height:72px;padding:0 22px;gap:15px}
+.legacy-admin .brand>span{font-size:25px}
+.legacy-admin .brand>small{font-size:7px;padding-left:10px}
+.legacy-admin .public-account>.btn{font-size:10px;padding:10px 13px;min-height:38px}
+.legacy-admin .public-mobile{border:0;background:transparent;padding:7px;min-width:32px;min-height:36px}
+.legacy-admin .public-account .avatar{display:none}
+.legacy-admin .landing-hero{display:block;padding:50px 25px 40px;min-height:auto}
+.legacy-admin .hero-copy h1{font-size:clamp(44px,10vw,66px);line-height:1.1;max-width:540px}
+.legacy-admin .hero-copy .eyebrow{font-size:8px;margin-bottom:20px}
+.legacy-admin .hero-copy p{font-size:13px;margin-top:22px;max-width:370px}
+.legacy-admin .hero-actions{margin-top:26px;gap:10px}
+.legacy-admin .hero-actions .btn{padding:13px 18px;font-size:12px}
+.legacy-admin .hero-caption{margin-top:25px;font-size:7px}
+.legacy-admin .stage-object{height:340px;max-width:380px;margin:35px auto 15px}
+.legacy-admin .backstage-pass{width:240px;min-height:300px;transform:rotate(8deg)}
+.legacy-admin .pass-mark{font-size:67px;margin:24px 0 18px}
+.legacy-admin .pass-title{font-size:19px}
+.legacy-admin .pass-foot{padding-top:15px}
+.legacy-admin .floating-note{left:8px;bottom:5px}
+.legacy-admin .hero-bottom{position:static;margin-top:34px;font-size:6px;gap:10px}
+.legacy-admin .hero-side-note{font-size:6px;right:9px;top:70%}
+.legacy-admin .ticker{justify-content:flex-start;gap:18px;font-size:8px;letter-spacing:.12em;padding:13px 22px}
+.legacy-admin .public-section{padding:55px 24px}
+.legacy-admin .public-section-header{display:block;margin-bottom:28px}
+.legacy-admin .public-section-header h2{font-size:30px;margin-top:16px}
+.legacy-admin .public-section-header .text-link{margin-top:15px}
+.legacy-admin .public-section-header p{margin-top:18px}
+.legacy-admin .public-about{grid-template-columns:1fr;gap:25px}
+.legacy-admin .about-statement{font-size:30px;line-height:1.35}
+.legacy-admin .about-copy{padding-top:0}
+.legacy-admin .about-copy p{font-size:13px}
+.legacy-admin .public-divider{margin:0 24px}
+.legacy-admin .directions{margin-top:25px}
+.legacy-admin .direction h3{font-size:21px;margin-top:18px}
+.legacy-admin .direction p{font-size:11px;min-height:75px}
+.legacy-admin .direction:nth-child(even){padding-left:18px}
+.legacy-admin .join-band{margin:5px 24px 55px;display:block;padding:30px 26px;border-radius:12px}
+.legacy-admin .join-band h2{font-size:28px}
+.legacy-admin .join-band .btn{margin-top:24px}
+.legacy-admin .steps{grid-template-columns:1fr;gap:3px}
+.legacy-admin .step{padding:21px 0}
+.legacy-admin .step p{font-size:12px}
+.legacy-admin .public-footer{padding:32px 24px 23px}
+.legacy-admin .footer-top{display:block}
+.legacy-admin .footer-links{gap:45px;margin-top:35px}
+.legacy-admin .footer-bottom{font-size:8px;flex-direction:column;gap:10px}
+.legacy-admin .public-page{padding:35px 24px 60px}
+.legacy-admin .public-page h1{font-size:34px}
+.legacy-admin .public-subtitle{font-size:13px}
+.legacy-admin .project-grid{grid-template-columns:1fr;gap:18px}
+.legacy-admin .project-cover{height:186px}
+.legacy-admin .project-body{padding:22px}
+.legacy-admin .project-body h3{font-size:22px}
+.legacy-admin .project-description{min-height:auto}
+.legacy-admin .project-footer .btn{font-size:12px}
+.legacy-admin .documents-grid{grid-template-columns:1fr}
+.legacy-admin .document-card{padding:22px}
+.legacy-admin .document-card-head{margin-bottom:22px}
+.legacy-admin .document-card h3{font-size:21px}
+.legacy-admin .document-card p{font-size:12px}
+.legacy-admin .community-grid{grid-template-columns:1fr}
+.legacy-admin .support-callout{display:block;padding:25px}
+.legacy-admin .support-callout .btn{margin-top:20px}
+.legacy-admin .auth-layout{grid-template-columns:1fr;min-height:calc(100vh - 72px)}
+.legacy-admin .auth-intro{display:none}
+.legacy-admin .auth-panel{padding:28px 24px 45px;justify-content:flex-start}
+.legacy-admin .auth-panel>.text-link{margin-bottom:35px}
+.legacy-admin .auth-form-wrap{margin:0 auto}
+.legacy-admin .auth-form-wrap h2{font-size:30px}
+.legacy-admin .workspace{display:block}
+.legacy-admin .workspace-main{width:100%}
+.legacy-admin .sidebar{transform:translateX(-100%);transition:transform .2s;width:245px;z-index:100}
+.legacy-admin .workspace.menu-open .sidebar{transform:none;box-shadow:0 0 0 100vmax #0006}
+.legacy-admin .workspace .sidebar .brand{font-size:27px}
+.legacy-admin .workspace .sidebar .brand small{font-size:7px}
+.legacy-admin .sidebar .nav-link{font-size:12px;padding:12px 14px;gap:12px}
+.legacy-admin .sidebar-user b{font-size:12px;max-width:150px}
+.legacy-admin .sidebar-user small{font-size:9px}
+.legacy-admin .workspace-mobile{display:inline-flex;border:0;padding:6px;margin-left:-5px;min-width:33px;min-height:35px}
+.legacy-admin .topbar-breadcrumb{gap:6px;font-size:10px;flex:1}
+.legacy-admin .topbar-breadcrumb>span:first-child{display:none}
+.legacy-admin .topbar-breadcrumb>.icon{display:none}
+.legacy-admin .workspace-topbar{height:64px;padding:0 20px;gap:10px}
+.legacy-admin .topbar-actions{gap:6px}
+.legacy-admin .topbar-actions .user-chip{padding-left:10px;margin-left:0}
+.legacy-admin .user-chip>span{display:none}
+.legacy-admin .topbar-actions .icon-btn{min-width:30px;min-height:34px;padding:7px}
+.legacy-admin .topbar-actions .avatar{width:28px;height:28px;font-size:9px}
+.legacy-admin .workspace-content{padding:27px 20px 45px}
+.legacy-admin .page-heading{display:block;margin-bottom:26px}
+.legacy-admin .page-heading h1{font-size:29px}
+.legacy-admin .page-heading p{font-size:11px}
+.legacy-admin .heading-actions{margin-top:18px;justify-content:flex-start}
+.legacy-admin .heading-actions .btn{font-size:11px}
+.legacy-admin .welcome-card{padding:23px;display:block}
+.legacy-admin .welcome-card .eyebrow{font-size:7px}
+.legacy-admin .welcome-card h2{font-size:24px}
+.legacy-admin .welcome-card .btn{margin-top:18px;font-size:11px}
+.legacy-admin .stats-grid{gap:11px;margin-bottom:23px}
+.legacy-admin .stat{padding:19px}
+.legacy-admin .stat b{font-size:28px}
+.legacy-admin .stat span{font-size:9px}
+.legacy-admin .stat-icon{width:29px;height:29px}
+.legacy-admin .dashboard-grid{gap:20px}
+.legacy-admin .card{padding:21px}
+.legacy-admin .workspace .project-grid{grid-template-columns:1fr}
+.legacy-admin .workspace .documents-grid{grid-template-columns:1fr}
+.legacy-admin .workspace .community-grid{grid-template-columns:1fr}
+.legacy-admin .workspace-footer{padding:18px 20px;font-size:8px;gap:15px}
+.legacy-admin .toolbar{gap:13px;margin-top:18px}
+.legacy-admin .toolbar .search-field{width:100%}
+.legacy-admin .toolbar .search-field input{width:100%;min-width:0}
+.legacy-admin .filter-tabs{max-width:100%;width:max-content}
+.legacy-admin .filter-tabs button{font-size:10px;padding:8px 12px}
+.legacy-admin .two-cols{gap:20px}
+.legacy-admin .form-grid{grid-template-columns:1fr;gap:0}
+.legacy-admin .form-grid>label{margin-bottom:18px}
+.legacy-admin .details-grid{gap:11px}
+.legacy-admin .detail-item{padding:12px}
+.legacy-admin .detail-item b{font-size:11px}
+.legacy-admin .dialog-header{padding:18px 21px}
+.legacy-admin .dialog-header h2{font-size:18px}
+.legacy-admin .dialog-content{padding:22px 21px}
+.legacy-admin .dialog-actions{flex-wrap:wrap}
+.legacy-admin .notification-card{padding:18px;gap:12px}
+.legacy-admin .notification-card h3{font-size:12px}
+.legacy-admin .notification-card p{font-size:11px}
+.legacy-admin .notification-icon{width:32px;height:32px;border-radius:7px}
+.legacy-admin .notification-card .btn{font-size:9px;min-height:29px;padding:7px}
+.legacy-admin .profile-header{gap:17px;align-items:flex-start}
+.legacy-admin .profile-header h2{font-size:23px;line-height:1.3}
+.legacy-admin .profile-header .avatar{width:65px;height:65px;font-size:20px}
+.legacy-admin .profile-header p{font-size:11px}
+.legacy-admin .metadata-row{font-size:9px;gap:8px}
+.legacy-admin .profile-header .metadata-row{margin-top:10px}
+.legacy-admin .id-card{max-width:none}
+.legacy-admin .ticket-card{padding:18px;gap:12px;align-items:flex-start}
+.legacy-admin .ticket-card .badge{font-size:8px}
+.legacy-admin .ticket-card h3{font-size:13px}
+.legacy-admin .feed-layout{gap:20px}
+.legacy-admin .post{padding:21px}
+.legacy-admin .post p{font-size:12px}
+.legacy-admin .kanban{grid-template-columns:1fr}
+.legacy-admin .kanban-column{min-height:120px}
+.legacy-admin .bo-layout{grid-template-columns:1fr;min-height:500px}
+.legacy-admin .bo-sidebar{padding:13px 16px;display:flex;gap:15px;align-items:center;border-right:0;border-bottom:1px solid var(--line);overflow:auto}
+.legacy-admin .bo-sidebar>.eyebrow{display:none}
+.legacy-admin .bo-sidebar>.btn{width:auto;flex-shrink:0;font-size:10px;padding:9px 12px;min-height:34px}
+.legacy-admin .bo-history{display:flex;overflow:auto;gap:7px}
+.legacy-admin .bo-history button{max-width:170px;flex-shrink:0;font-size:9px}
+.legacy-admin .bo-messages{height:410px;padding:23px 17px}
+.legacy-admin .bo-input{margin:0 15px 15px}
+.legacy-admin .bo-welcome{padding:25px 8px}
+.legacy-admin .bo-welcome h2{font-size:26px}
+.legacy-admin .bo-welcome p{font-size:11px}
+.legacy-admin .bo-prompts button{font-size:9px;padding:9px 10px}
+.legacy-admin .bo-message>p{font-size:11px;max-width:88%}
+.legacy-admin .bo-message{gap:8px}
+.legacy-admin .bo-message>.bo-avatar{width:24px;height:24px}
+.legacy-admin .conversation{max-height:40vh}
+.legacy-admin .recovery-layout{padding:32px 20px;gap:30px}
+.legacy-admin .recovery-card{padding:28px}
+.legacy-admin .recovery-card h1{font-size:27px}
+.legacy-admin .toast-stack{right:16px;bottom:16px;max-width:calc(100vw - 32px)}
+.legacy-admin .toast{font-size:11px;padding:13px 16px}
+.legacy-admin .only-mobile{display:initial}
+.legacy-admin .hide-mobile{display:none}
+.legacy-admin .legal-page h1{font-size:32px}
+.legacy-admin .notice{font-size:11px}
+.legacy-admin .help-row{font-size:11px;padding:15px}
+.legacy-admin .help-row .btn{font-size:10px}
+.legacy-admin .support-faq summary,.legacy-admin .faq-list summary{font-size:12px}
+}
+
+@media(prefers-reduced-motion:reduce){
+.legacy-admin *,.legacy-admin *:before,.legacy-admin *:after{animation:none!important;transition:none!important}
+.legacy-admin .spinner{border-color:var(--red)}
+}
+
+@media print{
+.legacy-admin .sidebar,.legacy-admin .workspace-topbar,.legacy-admin .workspace-footer,.legacy-admin .public-nav,.legacy-admin .public-footer,.legacy-admin .toast-stack,.legacy-admin .dialog-header,.legacy-admin .dialog-actions,.legacy-admin .btn{display:none!important}
+.legacy-admin .workspace-content{padding:0}
+.legacy-admin .workspace{display:block}
+.legacy-admin .workspace-main{width:100%}
+.legacy-admin .id-card,.legacy-admin .certificate-preview{break-inside:avoid}
+.legacy-admin dialog{position:static;display:block;max-height:none;border:0;box-shadow:none;width:100%}
+.legacy-admin .dialog-content{padding:0}
+.legacy-admin .printing-certificate #app{display:none}
+.legacy-admin .printing-certificate dialog:not([open]){display:none}
+}
+
+
+@media(max-width:700px){.legacy-admin input,.legacy-admin select,.legacy-admin textarea{font-size:16px}
+.legacy-admin .post p,.legacy-admin .bo-message>p,.legacy-admin .body-copy,.legacy-admin .auth-form-wrap>p,.legacy-admin .profile-about{font-size:14px}
+.legacy-admin .small,.legacy-admin .footer-note,.legacy-admin .form-hint,.legacy-admin .bo-input p{font-size:12px}
+.legacy-admin .btn{font-size:13px}
+}
+
+
+/* Shared presentation, workspace, and authentication styling. */
+@media screen {.legacy-admin h1,.legacy-admin h2,.legacy-admin h3{font-weight:650;letter-spacing:-.045em;text-wrap:balance}.legacy-admin p{text-wrap:pretty}.legacy-admin button,.legacy-admin a,.legacy-admin input,.legacy-admin select,.legacy-admin textarea{touch-action:manipulation}
+.legacy-admin .btn{border-radius:999px;padding:12px 23px;min-height:46px;font-size:14px;font-weight:500;gap:8px;letter-spacing:-.01em}.legacy-admin .btn:hover{transform:none}.legacy-admin .btn.primary:hover{background:#0077ed;box-shadow:none}.legacy-admin .btn.dark{background:var(--ink);color:var(--panel)}.legacy-admin .btn.secondary,.legacy-admin .btn.ghost{border-color:var(--line);background:var(--panel)}.legacy-admin .btn.secondary:hover,.legacy-admin .btn.ghost:hover{background:var(--bg)}.legacy-admin .btn.small{padding:9px 16px;font-size:13px;min-height:36px}.legacy-admin .btn.danger{background:#ff3b300d;color:var(--danger);border-color:#ff3b3026}.legacy-admin .btn.light{background:var(--panel);color:var(--red)}.legacy-admin .icon-btn{border-radius:50%;min-width:42px;min-height:42px;background:transparent}
+.legacy-admin .text-link,.legacy-admin .hero-link{color:var(--red);font-size:16px;font-weight:400;display:inline-flex;align-items:center;gap:5px}.legacy-admin .text-link:hover,.legacy-admin .hero-link:hover{text-decoration:underline;color:var(--red)}.legacy-admin .text-link .icon,.legacy-admin .hero-link .icon{width:15px;height:15px}.legacy-admin .eyebrow,.legacy-admin .section-label{font-size:13px;letter-spacing:0;text-transform:none;font-weight:550;margin-bottom:16px}.legacy-admin .section-label:before{display:none}
+.legacy-admin .brand{gap:0;justify-self:center;line-height:1}.legacy-admin .brand>span{font-family:var(--font);font-size:26px;font-weight:750;letter-spacing:-.075em}.legacy-admin .brand>small{display:none}
+.legacy-admin .public-nav{max-width:none;width:100%;height:64px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:24px;padding:0 max(28px,calc((100% - 1120px)/2));position:sticky;top:0;background:var(--glass);border-bottom:1px solid var(--line);backdrop-filter:blur(24px) saturate(1.65);-webkit-backdrop-filter:blur(24px) saturate(1.65);z-index:50}
+.legacy-admin .public-links{grid-column:1;grid-row:1;gap:22px;margin:0;font-size:12px;font-weight:400}.legacy-admin .public-links a:hover:after,.legacy-admin .public-links a[aria-current=page]:after{display:none}.legacy-admin .public-links a[aria-current=page]{color:var(--red)}.legacy-admin .public-nav>.brand{grid-column:2;grid-row:1}.legacy-admin .public-account{grid-column:3;grid-row:1;justify-self:end;margin:0}.legacy-admin .public-account .btn{font-size:12px;min-height:32px;padding:7px 14px}.legacy-admin .public-account .icon{width:13px;height:13px}.legacy-admin .public-mobile,.legacy-admin .mobile-dock{display:none}
+.legacy-admin .landing-hero{display:block;max-width:none;min-height:0;margin:0;padding:74px 24px 0;background:var(--panel);color:var(--ink);text-align:center;border-radius:0;overflow:hidden}.legacy-admin .hero-copy{max-width:920px;margin:auto}.legacy-admin .hero-copy .eyebrow{font-size:19px;letter-spacing:-.02em;color:var(--ink);font-weight:550;margin-bottom:20px}.legacy-admin .hero-copy h1{font-size:clamp(56px,7vw,88px);line-height:1.04;letter-spacing:-.06em;max-width:none;font-weight:650}.legacy-admin .hero-copy h1 em{color:var(--red);font-style:normal}.legacy-admin .hero-copy p{margin:26px auto 0;max-width:600px;font-size:22px;color:var(--muted);line-height:1.45;letter-spacing:-.025em}.legacy-admin .hero-actions{justify-content:center;align-items:center;gap:27px;margin:30px 0 0;flex-wrap:wrap}.legacy-admin .hero-actions .btn{font-size:16px;padding:13px 24px}
+.legacy-admin .apple-stage{height:390px;max-width:920px;margin:38px auto 0;position:relative;isolation:isolate}.legacy-admin .apple-stage:before{content:'';position:absolute;inset:45px 6% -80px;background:radial-gradient(ellipse at 50% 58%,#b9dfff70,transparent 65%);z-index:-1}.legacy-admin .stage-wordmark{position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:clamp(140px,20vw,248px);line-height:1;letter-spacing:-.085em;font-weight:800;color:#c1c7d0;background:linear-gradient(160deg,#fafbfd 12%,#bfc6d1 39%,#f8fbff 53%,#c7ced9 80%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 8px 5px #76899c12);user-select:none}
+.legacy-admin .glass-pass{position:absolute;width:330px;top:114px;left:50%;transform:translateX(-50%) rotate(-5deg);background:linear-gradient(130deg,#fffffff0,#ffffffa3);border:1px solid white;border-radius:28px;padding:24px 26px;box-shadow:0 30px 65px #617a9c20,0 4px 10px #6d839011;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);text-align:left;color:#1d1d1f}.legacy-admin .glass-pass-top{display:flex;align-items:center;gap:8px;font-size:11px;color:#6e6e73}.legacy-admin .glass-pass-top>.icon{margin-left:auto;width:18px;height:18px;color:#0071e3}.legacy-admin .glass-pass h2{font-size:39px;margin:29px 0 7px;letter-spacing:-.055em;font-weight:650}.legacy-admin .glass-pass>p{font-size:14px;color:#6e6e73}.legacy-admin .glass-pass-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #d7dde380;margin-top:26px;padding-top:15px;font-size:10px;color:#6e6e73}.legacy-admin .glass-pass-bottom .icon{width:15px;height:15px}
+.legacy-admin .stage-chip{position:absolute;display:flex;align-items:center;gap:11px;background:var(--glass);border:1px solid var(--glass-line);border-radius:18px;padding:16px 19px;box-shadow:0 12px 30px #4770930d;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);font-size:13px;color:var(--ink);transition:transform .2s}.legacy-admin .stage-chip>.icon:first-child{color:var(--red);width:22px;height:22px}.legacy-admin .stage-chip>.icon:last-child{width:14px;height:14px;color:var(--muted)}.legacy-admin .stage-chip:hover{transform:translateY(-3px)}.legacy-admin .chip-projects{left:3%;top:124px}.legacy-admin .chip-documents{right:1%;top:218px}.legacy-admin .stage-caption{position:absolute;bottom:12px;left:0;right:0;font-size:11px;color:var(--muted)}
+.legacy-admin .public-section{max-width:1180px;padding:90px 36px}.legacy-admin .public-section-header{margin-bottom:40px;gap:35px;align-items:flex-end}.legacy-admin .public-section-header h2,.legacy-admin .public-section>h2{font-size:clamp(36px,4.5vw,54px);line-height:1.08;margin-top:10px;font-weight:650}.legacy-admin .public-section-header p{font-size:16px;line-height:1.6;max-width:340px}.legacy-admin .public-section-header .text-link{white-space:nowrap;padding-bottom:5px}.legacy-admin .about-section{padding-top:98px;padding-bottom:100px}.legacy-admin .public-about{gap:70px}.legacy-admin .about-statement{font-size:clamp(32px,3.8vw,48px);letter-spacing:-.045em;font-weight:600;line-height:1.12;margin-top:18px}.legacy-admin .about-copy{padding-top:32px}.legacy-admin .about-copy p{font-size:17px;line-height:1.65;max-width:none}.legacy-admin .about-copy p+p{margin-top:16px}.legacy-admin .about-principles{gap:8px;margin-top:24px}.legacy-admin .about-principles span{border:0;border-radius:999px;background:var(--panel);padding:9px 13px;font-size:12px;font-weight:500}
+.legacy-admin .projects-section{background:var(--panel);max-width:none;padding-left:max(36px,calc((100% - 1108px)/2));padding-right:max(36px,calc((100% - 1108px)/2))}.legacy-admin .project-grid{gap:22px}.legacy-admin .project-card{border:0;border-radius:26px;background:var(--bg);box-shadow:none}.legacy-admin .workspace .project-card{background:var(--panel)}.legacy-admin .project-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #1d1d1f09}.legacy-admin .project-cover{height:210px;background:#dce7f3}.legacy-admin .project-cover-empty{background:radial-gradient(ellipse at 20% 10%,#f7fbff 0%,#dbe9f9 40%,#c6d4e8 100%)}.legacy-admin .project-cover-empty span{color:#ffffffb0;font-size:85px;font-weight:750;letter-spacing:-.08em}.legacy-admin .project-date-block{border-radius:12px;min-width:52px;min-height:59px;backdrop-filter:blur(12px)}.legacy-admin .project-cover .badge{border-radius:999px;font-size:11px}.legacy-admin .project-body{padding:25px}.legacy-admin .project-body .eyebrow{font-size:11px;letter-spacing:0;text-transform:none;margin-bottom:12px}.legacy-admin .project-body h3{font-size:23px;font-weight:600;line-height:1.2}.legacy-admin .project-description{font-size:14px;line-height:1.6;min-height:0}.legacy-admin .project-meta{font-size:12px}.legacy-admin .project-footer{font-size:11px;gap:10px;flex-wrap:wrap}
+.legacy-admin .directions{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;border:0;margin-top:0}.legacy-admin .direction,.legacy-admin .direction+.direction{border:0;border-radius:26px;padding:26px 23px;background:var(--panel)}.legacy-admin .direction-number{font-size:12px;letter-spacing:0;font-weight:500;color:var(--muted)}.legacy-admin .direction h3{font-size:25px;margin:35px 0 14px;letter-spacing:-.025em;font-weight:650}.legacy-admin .direction p{font-size:14px;line-height:1.65;min-height:0}.legacy-admin .direction>.icon{color:var(--red);margin-top:24px}.legacy-admin .start-section{padding-top:35px}.legacy-admin .steps{gap:45px;margin-top:45px}.legacy-admin .step{border:0;padding:0}.legacy-admin .step>span{display:grid;place-items:center;width:46px;height:46px;background:var(--panel);color:var(--red);border-radius:50%;font-size:16px;font-weight:550;letter-spacing:0;margin-bottom:24px}.legacy-admin .step h3{font-size:22px;font-weight:600;margin:0 0 12px}.legacy-admin .step p{font-size:15px;line-height:1.6}
+.legacy-admin .join-band{display:block;text-align:center;background:var(--panel);color:var(--ink);max-width:none;border-radius:0;margin:0;padding:85px 24px 90px}.legacy-admin .join-band .eyebrow{font-size:17px;color:var(--ink)}.legacy-admin .join-band h2{font-size:clamp(36px,4.5vw,56px);max-width:800px;margin:auto;font-weight:650;line-height:1.1}.legacy-admin .join-band p{font-size:19px;color:var(--muted);margin-top:23px}.legacy-admin .join-band>.btn{margin-top:28px}.legacy-admin .public-footer{max-width:1180px;padding:55px 36px 25px;border:0}.legacy-admin .footer-top{margin-bottom:36px}.legacy-admin .footer-top p{font-size:13px;line-height:1.6}.legacy-admin .footer-links{gap:65px;font-size:13px}.legacy-admin .footer-links b{font-size:12px;text-transform:none;letter-spacing:0;color:var(--ink);font-weight:550}.legacy-admin .footer-links a{font-size:12px;color:var(--muted)}.legacy-admin .footer-bottom{font-size:11px;letter-spacing:0;line-height:1.5}
+.legacy-admin .public-page{max-width:1180px;padding:70px 36px 95px}.legacy-admin .public-page h1,.legacy-admin .public-page>.page-heading h1{font-size:clamp(36px,5vw,56px)}.legacy-admin .public-subtitle{font-size:18px;line-height:1.6;margin:20px 0 30px;max-width:650px}.legacy-admin .empty-state{padding:42px 24px;border-radius:24px;background:var(--bg);grid-column:1/-1}.legacy-admin .empty-state h3{font-size:22px;font-weight:600}.legacy-admin .empty-state p{font-size:15px;line-height:1.6;max-width:510px;margin-left:auto;margin-right:auto}.legacy-admin .inline-error{grid-column:1/-1;font-size:15px;padding:24px;border-radius:20px}
+.legacy-admin .workspace{grid-template-columns:250px minmax(0,1fr)}.legacy-admin .sidebar{width:250px;overflow-y:auto;background:var(--nav);color:var(--ink);border-right:1px solid var(--line);padding:32px 16px 20px}.legacy-admin .sidebar .brand{display:flex;justify-content:flex-start;padding-left:17px;margin-bottom:25px}.legacy-admin .sidebar .brand>span{font-size:30px}.legacy-admin .sidebar-label{font-size:11px;font-weight:500;letter-spacing:0;color:var(--muted);padding:0 14px;margin:14px 0 10px}.legacy-admin .sidebar-nav{gap:3px}.legacy-admin .nav-link{border-radius:12px;font-size:13px;color:var(--muted);font-weight:450;padding:11px 14px;min-height:43px;gap:11px;flex-shrink:0}.legacy-admin .nav-link>.icon{color:var(--muted);width:19px;height:19px}.legacy-admin .nav-link.active,.legacy-admin .nav-link:hover{background:var(--panel);color:var(--ink)}.legacy-admin .nav-link.active{font-weight:550;box-shadow:0 2px 7px #00000005}.legacy-admin .nav-link.active>.icon{color:var(--red)}.legacy-admin .nav-link.active:before{display:none}.legacy-admin .nav-count{background:var(--red-soft);color:var(--red);border-radius:999px;font-size:10px}.legacy-admin .sidebar-bottom{padding-top:30px}.legacy-admin .sidebar-bottom .nav-link{font-size:12px}.legacy-admin .sidebar-user{border-color:var(--line);padding:20px 12px 0;overflow:visible}.legacy-admin .sidebar-user b{font-size:12px;max-width:160px;font-weight:550}.legacy-admin .sidebar-user small{font-size:11px;color:var(--muted)}.legacy-admin .avatar,.legacy-admin .sidebar-user .avatar{background:var(--red-soft);color:var(--red);font-weight:500}
+.legacy-admin .workspace-topbar{background:var(--glass);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);height:70px;padding:0 38px;border-bottom-color:var(--line)}.legacy-admin .topbar-breadcrumb{font-size:13px;gap:10px}.legacy-admin .topbar-actions .user-chip{font-size:13px;font-weight:500}.legacy-admin .workspace-content{padding:44px 38px 70px;max-width:1450px}.legacy-admin .page-heading{margin-bottom:32px}.legacy-admin .page-heading h1{font-size:36px;letter-spacing:-.045em;font-weight:650}.legacy-admin .page-heading .eyebrow{font-size:12px;letter-spacing:0;margin-bottom:8px;text-transform:none;font-weight:500}.legacy-admin .page-heading p{font-size:15px;line-height:1.6;margin-top:9px}
+.legacy-admin .welcome-card{padding:34px;border-radius:26px;background:linear-gradient(115deg,#e8f3ff,#f5f9ff);color:#1d1d1f;min-height:185px;margin-bottom:22px}.legacy-admin .welcome-card:after{display:none}.legacy-admin .welcome-card .eyebrow{font-size:12px;color:#6e6e73;letter-spacing:0}.legacy-admin .welcome-card h2{font-size:32px;line-height:1.1;font-weight:600}.legacy-admin .welcome-card p{color:#6e6e73;font-size:14px;max-width:520px;line-height:1.6}.legacy-admin .welcome-card .btn{background:white;color:#0071e3;font-size:14px}.legacy-admin .stats-grid{gap:16px}.legacy-admin .stat{padding:26px 23px;border:0;border-radius:22px}.legacy-admin .stat b{font-size:37px;font-weight:600;letter-spacing:-.04em;margin-bottom:12px}.legacy-admin .stat span{font-size:12px;font-weight:400;line-height:1.5}.legacy-admin .stat-icon{background:var(--red-soft);border-radius:11px;width:36px;height:36px}.legacy-admin .stat-icon>.icon{color:var(--red);width:19px;height:19px}
+.legacy-admin .card,.legacy-admin .post,.legacy-admin .document-card,.legacy-admin .ticket-card,.legacy-admin .notification-card{border:0;border-radius:24px;box-shadow:none;padding:26px;background:var(--panel)}.legacy-admin .card-title h2{font-size:21px;font-weight:600}.legacy-admin .card-title a{font-size:13px;color:var(--red);font-weight:400}.legacy-admin .compact-project{padding:20px 0;gap:15px}.legacy-admin .compact-project h3{font-size:15px;line-height:1.4;font-weight:550}.legacy-admin .compact-project p{font-size:12px;line-height:1.5;margin-top:5px}.legacy-admin .compact-date{border:0;border-radius:12px;min-width:50px;min-height:54px}.legacy-admin .compact-date b{font-size:20px;font-weight:600}.legacy-admin .compact-date small{font-size:10px;text-transform:none}.legacy-admin .mini-feed-item b{font-size:14px;font-weight:550}.legacy-admin .mini-feed-item p{font-size:13px;line-height:1.6}.legacy-admin .mini-feed-item small{font-size:11px}.legacy-admin .bo-promo{background:var(--red-soft)}.legacy-admin .bo-promo .bo-mark{border-radius:13px}.legacy-admin .bo-promo p{font-size:14px;line-height:1.6}.legacy-admin .small,.legacy-admin .body-copy{font-size:14px;line-height:1.6}.legacy-admin .notice{font-size:13px;line-height:1.6;border-radius:16px}.legacy-admin .workspace-footer{font-size:11px;padding:24px 38px;letter-spacing:0}
+.legacy-admin .table-scroll{border-radius:20px;border:0}.legacy-admin table{font-size:13px}.legacy-admin th{font-size:11px;text-transform:none;letter-spacing:0;font-weight:550;padding:17px 20px}.legacy-admin td{padding:19px 20px}.legacy-admin td strong{font-size:13px;font-weight:550}.legacy-admin td small{font-size:11px}
+.legacy-admin label{font-size:14px;font-weight:500;margin-bottom:20px}.legacy-admin input:not([type=checkbox]):not([type=radio]),.legacy-admin select,.legacy-admin textarea{font-size:16px;border-radius:12px;padding:13px 15px;min-height:49px;border-color:var(--line);background:var(--panel)}.legacy-admin input:focus,.legacy-admin select:focus,.legacy-admin textarea:focus{border-color:var(--red);outline:3px solid #0071e320}.legacy-admin .form-hint,.legacy-admin .form-error,.legacy-admin .check-label{font-size:12px;line-height:1.6}.legacy-admin .form-fieldset legend{font-size:13px;text-transform:none;letter-spacing:0;font-weight:500}.legacy-admin .form-error,.legacy-admin .danger-text{color:var(--danger)}.legacy-admin .settings-row{padding:22px 0}.legacy-admin .settings-row h3{font-size:15px;font-weight:500}.legacy-admin .settings-row p{font-size:13px}.legacy-admin .switch{width:42px;height:26px}.legacy-admin .switch span{border-radius:18px}.legacy-admin .switch span:after{width:20px;height:20px}.legacy-admin .switch input:checked+span:after{transform:translateX(16px)}.legacy-admin .filter-tabs{border-radius:999px;padding:4px;background:var(--panel);border:1px solid var(--line)}.legacy-admin .filter-tabs button{border-radius:999px;font-size:13px;padding:9px 15px;font-weight:500;min-height:37px}.legacy-admin .search-field input{font-size:15px;min-width:0}.legacy-admin .search-field{max-width:100%}
+.legacy-admin .document-card-head{margin-bottom:35px}.legacy-admin .document-number{font-size:12px}.legacy-admin .document-type{font-size:10px;letter-spacing:0;text-transform:none;border-radius:999px;padding:5px 9px;font-weight:500}.legacy-admin .document-card h3{font-size:23px;font-weight:600}.legacy-admin .document-card p{font-size:14px;line-height:1.6}.legacy-admin .document-card-bottom{font-size:12px;padding-top:20px}.legacy-admin .document-card-bottom button{font-size:14px;color:var(--red);font-weight:400;min-height:36px}.legacy-admin .document-reader h3{font-size:16px}.legacy-admin .document-reader p{font-size:15px;line-height:1.8}.legacy-admin .document-reader{max-height:58vh}.legacy-admin .footer-note{font-size:12px;line-height:1.6;margin-top:24px}.legacy-admin .support-callout{border:0;border-radius:24px;padding:32px;margin-top:24px}.legacy-admin .support-callout p{font-size:15px;line-height:1.6}.legacy-admin .support-callout .btn{margin-top:20px}.legacy-admin .faq-list summary,.legacy-admin .support-faq summary{font-size:16px;font-weight:500;padding:7px 0}.legacy-admin .faq-list details p,.legacy-admin .support-faq details p{font-size:15px;line-height:1.7}.legacy-admin .ticket-card h3{font-size:17px;font-weight:550}.legacy-admin .ticket-card p{font-size:13px}.legacy-admin .ticket-card .eyebrow{font-size:11px}
+.legacy-admin .message{border:0;border-radius:17px;padding:17px 20px}.legacy-admin .message header{font-size:11px}.legacy-admin .message p{font-size:15px;line-height:1.65}.legacy-admin .post-header h3{font-size:14px;font-weight:550}.legacy-admin .post-header small{font-size:12px}.legacy-admin .post p{font-size:16px;line-height:1.65}.legacy-admin .post-actions button{font-size:13px;min-height:36px}.legacy-admin .notification-card.unread{border:1px solid #0071e32e}.legacy-admin .notification-card h3{font-size:16px;font-weight:550}.legacy-admin .notification-card p{font-size:14px;line-height:1.6}.legacy-admin .notification-card small{font-size:11px}.legacy-admin .metadata-row{font-size:12px}.legacy-admin .profile-header p{font-size:15px}.legacy-admin .profile-header h2{font-size:32px;font-weight:600}.legacy-admin .id-card{border:0;border-radius:25px;background:linear-gradient(145deg,#202329,#0e1016);box-shadow:0 14px 35px #00000012}.legacy-admin .id-card .eyebrow{font-size:11px}.legacy-admin .id-card p{font-size:13px}.legacy-admin .id-card-footer{font-size:10px;letter-spacing:0}.legacy-admin .id-card .scg-id-number{font-size:20px;color:#8ec5ff}
+.legacy-admin .kanban-column{border:0;border-radius:20px;padding:18px}.legacy-admin .kanban-title{font-size:14px}.legacy-admin .kanban-title small{font-size:12px}.legacy-admin .draft-card{border:0;border-radius:16px;padding:19px}.legacy-admin .draft-card h3{font-size:14px;font-weight:550}.legacy-admin .draft-card p{font-size:13px}.legacy-admin .draft-card small{font-size:11px}.legacy-admin .security-check{border-radius:16px;padding:18px}.legacy-admin .security-check b{font-size:15px;font-weight:550}.legacy-admin .security-check p{font-size:13px}.legacy-admin .bo-layout{border:0;border-radius:26px}.legacy-admin .bo-sidebar{background:var(--panel)}.legacy-admin .bo-history button{font-size:13px;border-radius:12px}.legacy-admin .bo-welcome p{font-size:15px;line-height:1.6}.legacy-admin .bo-prompts button{font-size:13px;border-radius:999px;padding:11px 15px}.legacy-admin .bo-message>p{font-size:15px;border-radius:18px;line-height:1.65}.legacy-admin .bo-input>p{font-size:11px}.legacy-admin .bo-input .btn{border-radius:14px}.legacy-admin .bo-input textarea{background:var(--bg);border:0}.legacy-admin .help-row{font-size:14px;border-radius:18px;padding:20px}.legacy-admin .community-card p{font-size:14px;line-height:1.7}
+.legacy-admin .auth-layout{min-height:calc(100svh - 64px);background:var(--bg);padding:44px max(36px,calc((100% - 1120px)/2));gap:65px;grid-template-columns:1fr 1fr}.legacy-admin .auth-intro{padding:35px 0;background:transparent;color:var(--ink);overflow:visible}.legacy-admin .auth-intro .eyebrow{color:var(--muted);font-size:14px}.legacy-admin .auth-intro h1{font-size:clamp(40px,4vw,60px);line-height:1.07;font-weight:650}.legacy-admin .auth-intro p{font-size:17px;color:var(--muted);line-height:1.6;max-width:390px;margin-top:24px}.legacy-admin .intro-mark{position:static;font-size:140px;letter-spacing:-.08em;line-height:1.2;margin-top:38px;color:#c1c7d0;background:linear-gradient(145deg,#e2e8f0,#9eaab9 48%,#eef3f8);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}.legacy-admin .auth-panel{padding:35px;background:var(--panel);border-radius:28px;box-shadow:var(--shadow);width:100%;max-width:490px;align-self:center}.legacy-admin .auth-form-wrap{max-width:400px}.legacy-admin .auth-form-wrap h2{font-size:31px;font-weight:600;letter-spacing:-.04em}.legacy-admin .auth-form-wrap>.eyebrow{font-size:12px;letter-spacing:0;margin-bottom:10px}.legacy-admin .auth-form-wrap>.muted{font-size:15px;line-height:1.6;margin:15px 0 28px}.legacy-admin .auth-links{font-size:13px;gap:12px;flex-wrap:wrap}.legacy-admin .auth-links a{font-weight:500;color:var(--red)}.legacy-admin .auth-security{font-size:11px;line-height:1.5;padding-top:20px;margin-top:25px}.legacy-admin .auth-panel>.text-link{font-size:13px;margin-bottom:30px}.legacy-admin .recovery-layout{background:var(--bg)}.legacy-admin .recovery-card{border:0;border-radius:28px;padding:37px;max-width:490px}.legacy-admin .recovery-card>p{font-size:15px;line-height:1.6}.legacy-admin .recovery-card>.small{font-size:12px}
+.legacy-admin dialog{border-radius:26px;border:1px solid var(--glass-line);max-height:90svh}.legacy-admin .dialog-header{padding:23px 30px}.legacy-admin .dialog-content{padding:29px 30px}.legacy-admin .dialog-header h2{font-size:23px;font-weight:600}.legacy-admin dialog::backdrop{background:#00000050;backdrop-filter:blur(8px)}.legacy-admin .toast{background:#1d1d1feb;font-size:14px;border-radius:17px;backdrop-filter:blur(18px)}.legacy-admin .badge{font-size:11px;letter-spacing:0;text-transform:none;border-radius:999px;font-weight:500;padding:5px 9px}.legacy-admin .legal-page p,.legacy-admin .legal-page li{font-size:16px;line-height:1.8}.legacy-admin .legal-page h3{font-size:22px}
+@media(max-width:1150px){.legacy-admin .public-nav{padding:0 28px}.legacy-admin .public-links{gap:18px}.legacy-admin .workspace{grid-template-columns:220px minmax(0,1fr)}.legacy-admin .sidebar{width:220px}.legacy-admin .workspace-content{padding:35px 28px 65px}.legacy-admin .workspace-topbar{padding:0 28px}.legacy-admin .sidebar-user b{max-width:130px}.legacy-admin .stat{padding:22px 19px}.legacy-admin .stat b{font-size:32px}.legacy-admin .directions{gap:12px}.legacy-admin .direction,.legacy-admin .direction+.direction{padding:24px 19px}.legacy-admin .direction h3{font-size:23px}.legacy-admin .auth-layout{gap:35px;padding:35px}.legacy-admin .auth-panel{padding:30px}}
+@media(max-width:900px){.legacy-admin .public-nav{grid-template-columns:1fr auto 1fr;padding:0 24px}.legacy-admin .public-mobile{display:inline-flex;grid-column:1;grid-row:1;justify-self:start;border:0;width:42px;height:42px;padding:9px}.legacy-admin .public-links{display:none}.legacy-admin .public-nav.open .public-links{display:grid;top:72px;left:20px;right:20px;margin:0;padding:18px;background:var(--glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);gap:0;font-size:15px}.legacy-admin .public-nav.open .public-links a{padding:13px 15px}.legacy-admin .directions{grid-template-columns:repeat(2,minmax(0,1fr))}.legacy-admin .direction:nth-child(3){padding-left:23px}.legacy-admin .direction p{min-height:0}.legacy-admin .public-about{gap:35px}.legacy-admin .about-copy{padding-top:32px}.legacy-admin .chip-projects{left:0;top:130px}.legacy-admin .chip-documents{right:0;top:226px}.legacy-admin .stage-chip{font-size:12px;padding:14px 15px}.legacy-admin .dashboard-grid{grid-template-columns:1fr}.legacy-admin .workspace{grid-template-columns:200px minmax(0,1fr)}.legacy-admin .sidebar{width:200px;padding:28px 11px 20px}.legacy-admin .sidebar-user b{max-width:112px}.legacy-admin .nav-link{font-size:12px;padding:11px 10px;gap:9px}.legacy-admin .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.legacy-admin .workspace-content{padding:32px 23px 60px}.legacy-admin .workspace-topbar{padding:0 23px}.legacy-admin .page-heading h1{font-size:32px}.legacy-admin .heading-actions .btn{font-size:12px}.legacy-admin .steps{gap:25px}.legacy-admin .auth-intro h1{font-size:43px}.legacy-admin .auth-layout{gap:25px}.legacy-admin .auth-panel{padding:28px}.legacy-admin .bo-layout{grid-template-columns:180px minmax(0,1fr)}.legacy-admin .bo-messages{padding:22px}.legacy-admin .bo-sidebar{padding:17px}.legacy-admin .public-section-header h2{font-size:43px}}
+@media(max-width:700px){.legacy-admin .public-nav{height:60px;padding:0 18px;gap:12px}.legacy-admin .brand>span{font-size:25px}.legacy-admin .public-account>.btn{font-size:11px;min-height:32px;padding:8px 12px}.legacy-admin .public-account .icon{display:none}.legacy-admin .public-mobile{padding:10px;min-width:42px;min-height:42px;margin-left:-9px}
+.legacy-admin .mobile-dock{position:fixed;left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;padding:6px;z-index:60;border-radius:28px;border:1px solid var(--glass-line);background:var(--glass);backdrop-filter:blur(28px) saturate(1.8);-webkit-backdrop-filter:blur(28px) saturate(1.8);box-shadow:0 8px 28px #1d1d1f1a,0 1px 2px #00000007;max-width:440px;margin:auto}.legacy-admin .mobile-dock a,.legacy-admin .mobile-dock button{border:0;background:transparent;min-height:54px;color:var(--muted);font-size:10px;line-height:1.3;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;border-radius:23px;letter-spacing:0;font-weight:500;padding:4px}.legacy-admin .mobile-dock a[aria-current=page]{background:var(--red-soft);color:var(--red)}.legacy-admin .mobile-dock .icon{width:21px;height:21px}.legacy-admin .workspace-dock{grid-template-columns:repeat(5,minmax(0,1fr))}
+.legacy-admin .landing-hero{padding:45px 21px 0}.legacy-admin .hero-copy .eyebrow{font-size:16px;margin-bottom:17px}.legacy-admin .hero-copy h1{font-size:clamp(41px,10.4vw,68px);line-height:1.06;letter-spacing:-.055em}.legacy-admin .hero-copy p{font-size:18px;line-height:1.5;margin-top:23px}.legacy-admin .hero-actions{gap:18px;margin-top:25px;flex-direction:column}.legacy-admin .hero-actions .btn{font-size:15px;padding:12px 23px}.legacy-admin .hero-link{font-size:15px}.legacy-admin .apple-stage{height:305px;max-width:420px;margin-top:25px}.legacy-admin .stage-wordmark{top:24px;font-size:clamp(135px,35vw,190px)}.legacy-admin .glass-pass{width:245px;top:96px;padding:19px 21px;border-radius:23px}.legacy-admin .glass-pass h2{font-size:31px;margin-top:21px}.legacy-admin .glass-pass>p{font-size:12px}.legacy-admin .glass-pass-top{font-size:10px}.legacy-admin .glass-pass-bottom{font-size:8px;margin-top:20px;padding-top:12px}.legacy-admin .stage-chip{padding:10px 12px;gap:7px;border-radius:14px;font-size:10px;max-width:180px}.legacy-admin .stage-chip>.icon:first-child{width:16px;height:16px}.legacy-admin .stage-chip>.icon:last-child{display:none}.legacy-admin .chip-projects{left:-5px;top:74px}.legacy-admin .chip-documents{right:-5px;top:225px}.legacy-admin .stage-caption{font-size:10px;bottom:0}
+.legacy-admin .public-section{padding:58px 24px}.legacy-admin .public-section-header{display:block;margin-bottom:28px}.legacy-admin .public-section-header h2,.legacy-admin .public-section>h2{font-size:35px;line-height:1.1;margin-top:12px}.legacy-admin .public-section-header p{font-size:15px;margin-top:23px}.legacy-admin .public-section-header .text-link{margin-top:20px;font-size:15px}.legacy-admin .public-about{grid-template-columns:1fr;gap:22px}.legacy-admin .about-statement{font-size:34px;margin-top:15px;line-height:1.15}.legacy-admin .about-copy{padding-top:0}.legacy-admin .about-copy p{font-size:16px;line-height:1.65}.legacy-admin .about-principles span{font-size:11px;padding:8px 11px}.legacy-admin .section-label{font-size:12px;margin-bottom:14px}.legacy-admin .directions{gap:12px}.legacy-admin .direction,.legacy-admin .direction+.direction,.legacy-admin .direction:nth-child(3),.legacy-admin .direction:nth-child(even){padding:23px 19px;border-radius:22px}.legacy-admin .direction h3{font-size:22px;margin-top:25px}.legacy-admin .direction p{font-size:13px;min-height:0;line-height:1.6}.legacy-admin .direction-number{font-size:10px}.legacy-admin .direction>.icon{width:18px;height:18px}.legacy-admin .steps{grid-template-columns:1fr;gap:32px;margin-top:35px}.legacy-admin .step{padding:0}.legacy-admin .step>span{margin-bottom:17px;width:41px;height:41px;font-size:15px}.legacy-admin .step h3{font-size:22px}.legacy-admin .step p{font-size:15px}.legacy-admin .start-section{padding-top:20px}.legacy-admin .join-band{padding:59px 24px 66px}.legacy-admin .join-band h2{font-size:35px}.legacy-admin .join-band p{font-size:17px;line-height:1.5}.legacy-admin .join-band>.btn{margin-top:25px}.legacy-admin .join-band .eyebrow{font-size:15px}.legacy-admin .public-footer{padding:38px 24px 24px}.legacy-admin .footer-links{gap:38px;margin-top:30px}.legacy-admin .footer-links a{font-size:12px}.legacy-admin .footer-top{margin-bottom:28px}.legacy-admin .footer-bottom{font-size:10px;gap:9px}.legacy-admin .public-page{padding:39px 24px 55px}.legacy-admin .public-page h1,.legacy-admin .public-page>.page-heading h1{font-size:35px}.legacy-admin .public-subtitle{font-size:16px;margin-bottom:25px}.legacy-admin .project-grid{grid-template-columns:1fr;gap:20px}.legacy-admin .project-cover{height:200px}.legacy-admin .project-body{padding:24px}.legacy-admin .project-body h3{font-size:24px}.legacy-admin .project-description{font-size:15px}.legacy-admin .project-footer .btn{font-size:13px}.legacy-admin .empty-state{padding:33px 23px}.legacy-admin .empty-state h3{font-size:21px}.legacy-admin .empty-state p{font-size:14px}.legacy-admin .documents-grid{grid-template-columns:1fr}.legacy-admin .support-callout{padding:26px}.legacy-admin .support-callout h3{font-size:23px}.legacy-admin .support-callout p{font-size:15px}.legacy-admin .faq-list summary,.legacy-admin .support-faq summary{font-size:15px}.legacy-admin .faq-list details p,.legacy-admin .support-faq details p{font-size:14px}
+.legacy-admin .workspace{display:block;min-height:calc(100svh - 88px)}.legacy-admin .workspace-main{width:100%}.legacy-admin .sidebar{width:275px;transform:translateX(-100%);transition:transform .22s;z-index:100;padding:30px 18px 35px;padding-bottom:calc(35px + env(safe-area-inset-bottom))}.legacy-admin .workspace.menu-open .sidebar{transform:none;box-shadow:0 0 0 100vmax #00000050}.legacy-admin .sidebar .brand>span{font-size:30px}.legacy-admin .sidebar .nav-link{font-size:14px;padding:12px 14px;min-height:44px}.legacy-admin .sidebar-user b{font-size:13px;max-width:170px}.legacy-admin .sidebar-user small{font-size:11px}.legacy-admin .workspace-topbar{height:64px;padding:0 21px;gap:10px}.legacy-admin .workspace-mobile{display:inline-flex;min-height:42px;min-width:42px;padding:10px;margin-left:-8px}.legacy-admin .topbar-breadcrumb{font-size:13px;gap:6px}.legacy-admin .topbar-actions{gap:3px}.legacy-admin .topbar-actions .icon-btn{min-width:38px;min-height:38px;padding:9px}.legacy-admin .topbar-actions .user-chip{padding-left:8px}.legacy-admin .topbar-actions .avatar{width:30px;height:30px;font-size:10px}.legacy-admin .workspace-content{padding:31px 21px 45px}.legacy-admin .page-heading{display:block;margin-bottom:26px}.legacy-admin .page-heading h1{font-size:32px}.legacy-admin .page-heading p{font-size:14px;line-height:1.6}.legacy-admin .page-heading .eyebrow{font-size:11px;margin-bottom:8px}.legacy-admin .heading-actions{gap:8px;margin-top:19px;justify-content:flex-start}.legacy-admin .heading-actions .btn{font-size:12px;min-height:42px}.legacy-admin .welcome-card{display:block;padding:28px 25px;min-height:0;border-radius:24px}.legacy-admin .welcome-card h2{font-size:30px}.legacy-admin .welcome-card p{font-size:14px}.legacy-admin .welcome-card .btn{font-size:13px;margin-top:22px}.legacy-admin .welcome-card .eyebrow{font-size:11px}.legacy-admin .stats-grid{gap:12px}.legacy-admin .stat{padding:23px 18px;border-radius:21px}.legacy-admin .stat b{font-size:32px}.legacy-admin .stat span{font-size:11px}.legacy-admin .stat-icon{width:31px;height:31px}.legacy-admin .stat-icon>.icon{width:17px;height:17px}.legacy-admin .card,.legacy-admin .post,.legacy-admin .document-card,.legacy-admin .ticket-card,.legacy-admin .notification-card{padding:25px 23px;border-radius:23px}.legacy-admin .card-title h2{font-size:21px}.legacy-admin .card-title a{font-size:12px}.legacy-admin .compact-project h3{font-size:15px}.legacy-admin .compact-project p{font-size:12px}.legacy-admin .dashboard-grid{gap:20px}.legacy-admin .workspace-footer{font-size:10px;padding:22px 21px;gap:13px}.legacy-admin .filter-tabs{max-width:100%;overflow-x:auto}.legacy-admin .filter-tabs button{font-size:12px;padding:8px 13px;white-space:nowrap}.legacy-admin .toolbar{gap:15px}.legacy-admin .toolbar .search-field{width:100%}.legacy-admin .search-field input{width:100%;min-width:0}.legacy-admin .form-grid{grid-template-columns:1fr;gap:0}.legacy-admin .form-grid>label{margin-bottom:19px}.legacy-admin .form-actions{flex-wrap:wrap}.legacy-admin .details-grid{gap:11px}.legacy-admin .detail-item b{font-size:14px}.legacy-admin .detail-item{padding:15px}.legacy-admin .document-card h3{font-size:24px}.legacy-admin .document-card p{font-size:15px}.legacy-admin .document-card-head{margin-bottom:27px}.legacy-admin .two-cols,.legacy-admin .community-grid{grid-template-columns:1fr}.legacy-admin .profile-header h2{font-size:28px}.legacy-admin .profile-header p{font-size:14px}.legacy-admin .profile-header .metadata-row{font-size:11px}.legacy-admin .notification-card h3{font-size:15px}.legacy-admin .notification-card p{font-size:14px}.legacy-admin .notification-card button{font-size:11px;min-height:36px}.legacy-admin .ticket-card h3{font-size:16px}.legacy-admin .ticket-card p{font-size:12px}.legacy-admin .message p{font-size:14px}.legacy-admin .bo-layout{grid-template-columns:1fr}.legacy-admin .bo-sidebar{padding:15px}.legacy-admin .bo-sidebar>.btn{font-size:12px}.legacy-admin .bo-history button{font-size:12px}.legacy-admin .bo-welcome h2{font-size:30px}.legacy-admin .bo-welcome p{font-size:14px}.legacy-admin .bo-prompts button{font-size:12px;padding:10px 13px}.legacy-admin .bo-messages{padding:25px 17px;height:400px}.legacy-admin .bo-message>p{font-size:14px}.legacy-admin .bo-input{margin:0 17px 18px}.legacy-admin .bo-input>p{font-size:11px}.legacy-admin .bo-input textarea{font-size:16px}.legacy-admin .kanban{grid-template-columns:1fr}.legacy-admin .post p{font-size:15px}
+.legacy-admin .auth-layout{display:block;min-height:calc(100svh - 60px);padding:26px 18px 30px}.legacy-admin .auth-intro{display:none}.legacy-admin .auth-panel{padding:28px 24px;margin:0 auto;border-radius:25px}.legacy-admin .auth-form-wrap h2{font-size:29px;line-height:1.15}.legacy-admin .auth-form-wrap>.muted{font-size:14px}.legacy-admin .auth-links{font-size:12px}.legacy-admin .auth-security{font-size:11px}.legacy-admin .auth-panel>.text-link{font-size:13px;margin-bottom:30px}.legacy-admin .auth-form-wrap input,.legacy-admin .auth-form-wrap select{font-size:16px}.legacy-admin .recovery-layout{padding:32px 19px;min-height:calc(100svh - 88px)}.legacy-admin .recovery-card{padding:30px 25px}.legacy-admin .recovery-card h1{font-size:29px}.legacy-admin .recovery-card>p{font-size:14px}.legacy-admin .dialog-header{padding:20px 23px}.legacy-admin .dialog-header h2{font-size:21px}.legacy-admin .dialog-content{padding:24px 23px}.legacy-admin .dialog-actions{flex-wrap:wrap}.legacy-admin .toast-stack{bottom:calc(98px + env(safe-area-inset-bottom));right:16px;left:16px;max-width:none}.legacy-admin .toast{font-size:13px}.legacy-admin .legal-page p,.legacy-admin .legal-page li{font-size:15px}.legacy-admin .help-row{font-size:13px;padding:18px;flex-wrap:wrap}.legacy-admin .help-row .btn{font-size:12px}.legacy-admin .footer-note{font-size:12px}
+}
+@media(max-width:370px){.legacy-admin .hero-copy h1{font-size:39px}.legacy-admin .glass-pass{width:225px}.legacy-admin .stage-chip{font-size:9px}.legacy-admin .directions{grid-template-columns:1fr}.legacy-admin .direction h3{margin-top:18px}.legacy-admin .stat{padding:20px 15px}.legacy-admin .stat b{font-size:28px}.legacy-admin .stat-icon{display:none}.legacy-admin .topbar-actions .user-chip{display:none}.legacy-admin .mobile-dock{left:10px;right:10px}}
+@media(prefers-reduced-transparency:reduce){.legacy-admin .public-nav,.legacy-admin .workspace-topbar,.legacy-admin .mobile-dock,.legacy-admin .stage-chip{background:var(--panel);backdrop-filter:none;-webkit-backdrop-filter:none}.legacy-admin .glass-pass{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}}
+}
+@media print{.legacy-admin .mobile-dock,.legacy-admin .apple-stage{display:none!important}}
+
+@media screen{.legacy-admin .sidebar-close{display:none}@media(max-width:700px){.legacy-admin .sidebar-close{display:inline-flex;position:absolute;right:16px;top:23px;border:0;font-size:26px}.legacy-admin .sidebar .brand{max-width:155px}.legacy-admin .workspace-dock{grid-auto-columns:minmax(0,1fr);grid-template-columns:repeat(5,minmax(0,1fr))}}}
+
+@media screen{.legacy-admin .empty-state{border:0}.legacy-admin .badge-rejected,.legacy-admin .badge-cancelled,.legacy-admin .badge-closed{color:var(--danger);background:#ff3b3010;border-color:#ff3b3020}@media(max-width:700px){.legacy-admin .workspace-dock.dock-count-4{grid-template-columns:repeat(4,minmax(0,1fr))}.legacy-admin .workspace-dock.dock-count-3{grid-template-columns:repeat(3,minmax(0,1fr))}}}
+
+/* Digital badge verification in Command Center. */
+.legacy-admin .qr-camera-panel[hidden]{display:none}.legacy-admin .qr-camera-panel{margin:20px 0;padding:14px;border-radius:20px;background:var(--bg)}.legacy-admin .qr-camera-panel video{display:block;width:100%;max-height:380px;object-fit:cover;border-radius:14px}.legacy-admin .qr-camera-panel p{font-size:13px;margin:12px 0}.legacy-admin .qr-file-label{position:relative;overflow:hidden;cursor:pointer;margin:0}.legacy-admin .qr-file-label input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}.legacy-admin .badge-check-result{margin-top:20px;border:1px solid var(--line);border-radius:20px;padding:20px}.legacy-admin .badge-check-active h3{color:var(--green)}.legacy-admin .badge-check-invalid h3{color:var(--danger)}.legacy-admin .badge-check-result .profile-header{gap:15px;align-items:center;margin:18px 0}.legacy-admin .badge-check-result .profile-header p{margin:5px 0;font-size:12px}.legacy-admin .badge-check-photo{width:70px;height:82px;object-fit:cover;border-radius:12px}.legacy-admin .badge-check-result .toolbar{margin-top:16px}
+
+.legacy-admin .org-page{--org-border:color-mix(in srgb,currentColor 13%,transparent)}
+.legacy-admin .org-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 28px;border-bottom:1px solid var(--org-border);padding-bottom:12px}.legacy-admin .org-tabs a{padding:11px 17px;border-radius:30px;font-size:13px;font-weight:600;color:inherit;text-decoration:none}.legacy-admin .org-tabs a[aria-current=page]{background:#121416;color:#fff}.legacy-admin .org-tabs a:hover{box-shadow:inset 0 0 0 1px var(--org-border)}
+.legacy-admin .org-hero{display:flex;justify-content:space-between;gap:32px;background:#111517;color:#fff;border-radius:26px;padding:38px;margin-bottom:22px}.legacy-admin .org-hero h2{font-size:clamp(28px,3.3vw,46px);line-height:1.05;letter-spacing:-.045em;margin:15px 0 20px}.legacy-admin .org-hero p{max-width:540px;line-height:1.65;color:#c7cccd;font-size:14px}.legacy-admin .org-hero .eyebrow{color:#c4d4bf}.legacy-admin .org-summary{min-width:160px;display:flex;flex-direction:column;justify-content:center;gap:10px}.legacy-admin .org-summary b{font-size:72px;line-height:1;letter-spacing:-.07em}.legacy-admin .org-summary span{font-size:13px}.legacy-admin .org-summary small{font-size:11px;color:#b9bebe;line-height:1.6}
+.legacy-admin .org-lead{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;padding:26px;border:1px solid var(--org-border);border-radius:22px;margin-bottom:28px}.legacy-admin .org-lead>div{padding:12px}.legacy-admin .org-lead h3{margin:12px 0;font-size:25px;letter-spacing:-.035em}.legacy-admin .org-lead small{display:block;line-height:1.6;color:var(--muted,#787c80)}.legacy-admin .org-departments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.legacy-admin .org-department{border:1px solid var(--org-border);border-radius:22px;overflow:hidden;padding:22px}.legacy-admin .org-department>header{padding:5px 5px 18px}.legacy-admin .org-department>header h2{font-size:23px;letter-spacing:-.04em;margin:12px 0 8px}.legacy-admin .org-code{font-weight:700;font-size:12px;letter-spacing:.12em;border:1px solid var(--org-border);padding:7px 10px;border-radius:8px}.legacy-admin .org-position{border-top:1px solid var(--org-border);padding:20px 5px;display:flex;flex-direction:column;gap:12px}.legacy-admin .org-position h3{font-size:16px;margin:7px 0;letter-spacing:-.02em}.legacy-admin .org-position .eyebrow{font-size:9px}.legacy-admin .org-position p{line-height:1.6;margin:0}.legacy-admin .org-position .btn{align-self:flex-start}.legacy-admin .org-people p{font-size:13px}.legacy-admin .org-people small{display:block;font-size:11px;color:var(--muted,#787c80);margin-top:4px}.legacy-admin .org-page .card{margin-bottom:22px}.legacy-admin .org-page .card>p{margin:12px 0 22px;line-height:1.65}.legacy-admin .org-page .toolbar{align-items:end;margin:24px 0}.legacy-admin .org-search{flex:1}.legacy-admin .org-page table small{display:block}.legacy-admin .org-page .notice{margin-bottom:24px}
+@media(max-width:700px){.legacy-admin .org-hero{padding:25px;flex-direction:column;gap:22px}.legacy-admin .org-summary{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start}.legacy-admin .org-summary b{font-size:45px}.legacy-admin .org-summary small{width:100%}.legacy-admin .org-lead,.legacy-admin .org-departments{grid-template-columns:1fr}.legacy-admin .org-lead{padding:16px;gap:10px}.legacy-admin .org-tabs{gap:0}.legacy-admin .org-tabs a{padding:10px 11px;font-size:12px}.legacy-admin .org-department{padding:18px}.legacy-admin .org-page .toolbar{align-items:stretch;flex-direction:column}.legacy-admin .org-page table{min-width:620px}}
+
+@media(prefers-color-scheme:dark){}
+.legacy-admin *{box-sizing:border-box}.legacy-admin button,.legacy-admin a{-webkit-tap-highlight-color:transparent}.legacy-admin button{font:inherit;cursor:pointer}.legacy-admin a{color:inherit;text-decoration:none}.legacy-admin button:focus-visible,.legacy-admin a:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.legacy-admin .badge-nav{width:min(960px,100%);margin:auto;display:flex;align-items:center;justify-content:space-between;padding:24px max(22px,env(safe-area-inset-right)) 20px max(22px,env(safe-area-inset-left))}.legacy-admin .badge-brand{display:flex;gap:12px;align-items:center;font-size:13px;font-weight:600;letter-spacing:-.02em}.legacy-admin .badge-brand img{width:46px;height:32px;object-fit:contain;background:#fff;border-radius:6px;padding:4px}.legacy-admin .theme-toggle{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;color:var(--text);background:var(--glass);font-size:24px;backdrop-filter:blur(20px)}
+.legacy-admin .badge-main{width:min(460px,100%);margin:20px auto 0;padding:0 20px}.legacy-admin .eyebrow{font-size:11px;font-weight:700;letter-spacing:.19em;color:var(--muted);text-align:center;margin:0 0 18px}.legacy-admin .digital-badge{overflow:hidden;background:var(--glass);border:1px solid var(--line);border-radius:32px;box-shadow:var(--shadow);backdrop-filter:blur(30px) saturate(145%);-webkit-backdrop-filter:blur(30px) saturate(145%);padding:25px}.legacy-admin .card-top{display:flex;justify-content:space-between;gap:12px;font-size:9px;letter-spacing:.09em;font-weight:600;color:var(--muted);margin-bottom:28px}.legacy-admin .card-top span:last-child{letter-spacing:0;font-weight:400}.legacy-admin .portrait-wrap{width:148px;height:174px;margin:0 auto 24px;border-radius:24px;border:1px solid var(--line);overflow:hidden;background:var(--panel)}.legacy-admin .portrait{width:100%;height:100%;object-fit:cover}.legacy-admin .portrait-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);text-align:center;padding:15px}.legacy-admin .portrait-empty span{font-size:40px}.legacy-admin .portrait-empty small{font-size:12px;line-height:1.5}.legacy-admin .photo-error{font-size:12px;text-align:center;padding:40px 10px;color:var(--muted)}.legacy-admin .identity{text-align:center}.legacy-admin .person-role{font-size:10px;letter-spacing:.14em;font-weight:650;color:var(--muted);margin:0 0 12px}.legacy-admin h1{font-size:clamp(25px,7vw,32px);font-weight:650;line-height:1.1;letter-spacing:-.045em;margin:0;overflow-wrap:anywhere}.legacy-admin .personnel-id{display:inline-block;margin:17px 0 23px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:17px;letter-spacing:.08em;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:9px 16px}.legacy-admin .verification{display:flex;align-items:flex-start;gap:11px;border-top:1px solid var(--line);padding-top:22px}.legacy-admin .verification strong{font-size:14px;font-weight:600}.legacy-admin .verification p{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.5}.legacy-admin .status-dot{height:8px;width:8px;flex:none;border-radius:50%;margin-top:5px;background:currentColor}.legacy-admin .is-active{color:var(--green)}.legacy-admin .is-inactive{color:var(--red)}.legacy-admin .verified-time{font-size:10px;line-height:1.6;color:var(--muted);margin:16px 0 0 19px}.legacy-admin .badge-footnote{font-size:11px;color:var(--muted);line-height:1.65;text-align:center;margin:17px 13px 25px}.legacy-admin .admission-note{display:flex;gap:13px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:19px}.legacy-admin .admission-note>span{color:var(--blue);font-size:22px}.legacy-admin .admission-note strong{font-size:12px;font-weight:600}.legacy-admin .admission-note p{font-size:12px;line-height:1.6;color:var(--muted);margin:7px 0 0}.legacy-admin footer{font-size:10px;text-align:center;color:var(--muted);padding:30px 20px max(28px,env(safe-area-inset-bottom))}.legacy-admin .loading-state{min-height:400px;display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;font-size:14px;color:var(--muted)}.legacy-admin .spinner{width:24px;height:24px;border:2px solid var(--line);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.legacy-admin .badge-error{text-align:center;padding:60px 0}.legacy-admin .badge-error h1{font-size:27px}.legacy-admin .badge-error p{font-size:14px;line-height:1.6;color:var(--muted)}.legacy-admin .error-symbol{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:50%;width:46px;height:46px;margin:0 0 25px;font-size:23px;color:var(--red)}.legacy-admin .retry-button{display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;border:0;border-radius:999px;padding:12px 22px;font-size:13px;margin:12px 0 0}
+@media(max-width:360px){.legacy-admin .badge-nav{padding:18px}.legacy-admin .badge-main{padding:0 14px;margin-top:15px}.legacy-admin .digital-badge{padding:21px;border-radius:28px}.legacy-admin .badge-brand span{font-size:12px}}@media(prefers-reduced-motion:reduce){.legacy-admin .spinner{animation:none}}

@@ -1,0 +1,10 @@
+const CACHE='scg-ecosystem-shell-v2-20261108';
+const SHELL=['/','/offline.html','/offline.css','/manifest.webmanifest','/pwa-icons/icon-192.png','/pwa-icons/icon-512.png'];
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)));});
+self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>(k.startsWith('scg-essentials-')||k.startsWith('scg-ecosystem-shell-'))&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
+self.addEventListener('fetch',event=>{const u=new URL(event.request.url);if(event.request.method!=='GET'||u.origin!==self.location.origin||u.pathname.startsWith('/api/')||event.request.headers.has('Authorization'))return;
+ if(event.request.mode==='navigate'){event.respondWith(fetch(event.request).catch(()=>caches.match('/offline.html')));return;}
+ if(!/^\/(assets\/|pwa-icons\/|fonts\/|media\/|(?:one|space|manifest).webmanifest$|preferences.css$)/.test(u.pathname))return;
+ event.respondWith(caches.match(event.request).then(hit=>hit||fetch(event.request).then(response=>{if(response.ok){const copy=response.clone();event.waitUntil(caches.open(CACHE).then(c=>c.put(event.request,copy)));}return response})));});
+self.addEventListener('push',event=>{let data={};try{data=event.data?.json()||{}}catch{}event.waitUntil(self.registration.showNotification('Stage Craft Group',{body:typeof data.body==='string'?data.body.slice(0,220):'Stage Craft Group',icon:'/pwa-icons/icon-192.png',badge:'/pwa-icons/icon-192.png',tag:typeof data.tag==='string'?data.tag:'scg-update',data:{path:typeof data.path==='string'&&data.path.startsWith('/#/essentials')?data.path:'/#/essentials/notifications'}}));});
+self.addEventListener('notificationclick',event=>{event.notification.close();const target=new URL(event.notification.data?.path||'/#/essentials/notifications',self.location.origin).href;event.waitUntil(self.clients.matchAll({type:'window',includeUncontrolled:true}).then(async clients=>{for(const client of clients)if('focus'in client){await client.navigate(target);return client.focus()}return self.clients.openWindow(target)}));});

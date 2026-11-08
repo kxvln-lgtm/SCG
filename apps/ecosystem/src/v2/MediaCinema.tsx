@@ -1,0 +1,12 @@
+import {useState} from 'react';
+import {Link} from 'react-router-dom';
+import {ArrowLeft,ArrowRight,Image} from 'lucide-react';
+import {AmbientImage} from './AmbientMedia';
+import {Row,imageUrl} from '../data';
+export function MediaCinema({projects,loading=false,error=false}:{projects:Row[];loading?:boolean;error?:boolean}){
+ const media=projects.filter(p=>imageUrl(p.cover_url));const [index,setIndex]=useState(0);const active=media.length?index%media.length:0;const [start,setStart]=useState<number|null>(null);
+ const move=(n:number)=>setIndex(v=>(v+n+media.length)%media.length);
+ return <section className="media-cinema" aria-label="Медиа проектов SPACE" onKeyDown={e=>{if(!media.length)return;if(e.key==='ArrowLeft'){e.preventDefault();move(-1);}if(e.key==='ArrowRight'){e.preventDefault();move(1);}}}>
+  {loading?<div className="cinema-empty" role="status">Загружаем проекты…</div>:media.length?<><div className="cinema-stage" onPointerDown={e=>setStart(e.clientX)} onPointerUp={e=>{if(start!==null&&Math.abs(e.clientX-start)>40)move(e.clientX<start?1:-1);setStart(null);}} onPointerCancel={()=>setStart(null)}>{media.map((p,i)=>{let offset=i-active;if(offset>media.length/2)offset-=media.length;if(offset< -media.length/2)offset+=media.length;return <article className={'cinema-frame'+(offset===0?' current':'')} key={p.id} style={{'--offset':offset,'--distance':Math.abs(offset),zIndex:10-Math.abs(offset)} as React.CSSProperties} aria-hidden={offset!==0} inert={offset!==0}><AmbientImage src={p.cover_url} alt=""/><div><small>{p.direction||p.department||'SPACE'}</small><h2>{p.title}</h2><Link to={'/space/projects/'+p.id}>Открыть проект <ArrowRight size={17}/></Link></div></article>;})}</div><div className="cinema-controls"><button className="platform-icon" disabled={media.length<2} onClick={()=>move(-1)} aria-label="Предыдущий проект"><ArrowLeft/></button><span aria-live="polite">{active+1} / {media.length}</span><button className="platform-icon" disabled={media.length<2} onClick={()=>move(1)} aria-label="Следующий проект"><ArrowRight/></button></div></>:<div className="cinema-empty"><Image size={34}/><h2>{error?'Медиа пока недоступны':'Здесь появятся ваши истории.'}</h2><p>{error?'Повторите загрузку страницы.':'Опубликованные креативные проекты с обложками появятся в этой галерее.'}</p><Link to="/space/portfolio">Перейти к портфолио <ArrowRight size={17}/></Link></div>}
+ </section>;
+}

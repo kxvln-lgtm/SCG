@@ -1,0 +1,1 @@
+try{const theme=localStorage.getItem('scg-color-scheme');document.documentElement.dataset.theme=['light','dark'].includes(theme)?theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';const lang=localStorage.getItem('scg-language');if(['ru','kk','en'].includes(lang))document.documentElement.lang=lang;}catch{}

@@ -1,0 +1,41 @@
+{
+  "id": "/one",
+  "name": "Backstage One",
+  "short_name": "Backstage One",
+  "start_url": "/#/one",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#e8e9ee",
+  "theme_color": "#e8e9ee",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "/pwa-icons/one.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-icons/one-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa-icons/one-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Проекты",
+      "url": "/#/one/discover"
+    },
+    {
+      "name": "SCG ID",
+      "url": "/#/one/id"
+    }
+  ]
+}

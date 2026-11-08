@@ -1,0 +1,188 @@
+import {getLanguage,text} from './preferences.js?v=20261025-auth3';
+import {REGIONS,regionName,savedLocation} from './location.js?v=20261025-auth3';
+import {CONFIG,$,esc,roleName,errorText,result,busy,toast,icon} from './core.js?v=20261025-auth3';
+
+const url = new URL(location.href);
+const hash = new URLSearchParams(location.hash.slice(1));
+export const recoveryEntry = location.pathname.includes('reset-password') || hash.get('type') === 'recovery' || url.searchParams.get('type') === 'recovery';
+export const auth = {client:null,session:null,profile:null,org:null,recovery:recoveryEntry,ready:false,error:null,otp:null,mfaRequired:false,factors:[],formBusy:false};
+let observer = () => {}, profileFlight, recoveryVerified = false;
+export function onAuthChange(fn) { observer = fn; }
+export async function loadProfile() {
+  if (!auth.session) { auth.profile = null; auth.org=null; return null; }
+  const id=auth.session.user.id;
+  if (profileFlight?.id===id) return profileFlight.promise;
+  const promise=(async()=>{const p=await result(auth.client.from('profiles').select('*').eq('id',id).maybeSingle());if(auth.session?.user.id===id){auth.profile=p;auth.org=null;const context=await auth.client.rpc('scg_cc_context');if(auth.session?.user.id===id&&!context.error)auth.org=context.data;}return p;})();
+  profileFlight={id,promise};
+  try{return await promise;}finally{if(profileFlight?.promise===promise)profileFlight=null;}
+}
+export async function checkMfa(){
+  if(!auth.session){auth.mfaRequired=false;auth.factors=[];return;}
+  // Command Center uses the server-assigned role, without mandatory enrollment.
+  if(legacyAdmin()&&!auth.recovery){auth.mfaRequired=false;auth.factors=[];return;}
+  const r=await auth.client.auth.mfa.getAuthenticatorAssuranceLevel();if(r.error)throw r.error;
+  auth.mfaRequired=r.data.nextLevel==='aal2'&&r.data.currentLevel!=='aal2';
+  if(auth.mfaRequired){const f=await auth.client.auth.mfa.listFactors();if(f.error)throw f.error;auth.factors=(f.data.totp||[]).filter(f=>f.status==='verified');}
+}
+export async function initAuth() {
+  if (!window.supabase?.createClient) { auth.error=new Error('SDK unavailable');auth.ready=true;return; }
+  auth.client=window.supabase.createClient(CONFIG.supabaseUrl,CONFIG.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'implicit'}});
+  // Keep PASSWORD_RECOVERY latched until the password has been changed.
+  auth.client.auth.onAuthStateChange((event,session)=>{
+    if(event==='PASSWORD_RECOVERY'){auth.recovery=true;recoveryVerified=true;}
+    if(auth.session?.user.id!==session?.user.id)auth.profile=null;
+    auth.session=session;
+    if(event==='SIGNED_OUT'){auth.profile=null;auth.org=null;}
+    setTimeout(async()=>{
+      try{if(session){if(!auth.recovery)await loadProfile();await checkMfa();}}catch(e){auth.error=e;}
+      if(auth.ready)observer(event);
+    },0);
+  });
+  try {
+    if(url.searchParams.get('error')||hash.get('error')||url.searchParams.get('error_description')||hash.get('error_description')) {
+      history.replaceState(null,'',location.pathname);
+      throw new Error(recoveryEntry?'Recovery token expired':'OAUTH_CANCELLED');
+    }
+    const tokenHash=url.searchParams.get('token_hash');
+    if(tokenHash&&url.searchParams.get('type')==='recovery') {
+      auth.recovery=true;
+      const r=await auth.client.auth.verifyOtp({token_hash:tokenHash,type:'recovery'});
+      if(r.error)throw r.error;
+      auth.session=r.data.session;recoveryVerified=!!auth.session;
+      history.replaceState(null,'',location.pathname);
+    } else {
+      const r=await auth.client.auth.getSession();if(r.error)throw r.error;auth.session=r.data.session;
+      if(hash.get('type')==='recovery'&&auth.session)recoveryVerified=true;
+    }
+    if(auth.session){if(!auth.recovery)await loadProfile();await checkMfa();}
+  }catch(e){auth.error=e;}
+  auth.ready=true;
+}
+export function legacyAdmin() { return !!auth.profile && ['FOUNDER','UNION_LEAD','REGIONAL_EXECUTIVE','STAFF','PR','SYSTEMS'].includes(auth.profile.role) && ['активен','одобрено'].includes(auth.profile.status); }
+export function canAdmin() { return legacyAdmin() || (!!auth.org?.can_enter && ['активен','одобрено'].includes(auth.profile?.status)); }
+export function canManage() { return legacyAdmin() && auth.profile.role !== 'PR'; }
+export function authCard(mode = 'login', admin = false) {
+  if(!admin&&CONFIG.emailOtpEnabled&&mode!=='forgot')return emailOtpCard(mode);
+  const loc=savedLocation();
+  const recover = mode === 'forgot';
+  const register = mode === 'register';
+  return `<div class="auth-layout"><div class="auth-intro"><span class="eyebrow">${admin?'SCG / COMMAND CENTER':'SCG / BACKSTAGE'}</span><h1>${recover?'Вернём<br>тебе доступ.':register?'Твоё место<br>в команде.':'За каждой сценой —<br>свои люди.'}</h1><p>${admin?'Вход для команды управления. Доступ определяется твоей ролью в SCG.':'Проекты, команда и твоя история участия — в одном пространстве.'}</p><span class="intro-mark">SCG.</span></div><div class="auth-panel"><a class="text-link" href="${CONFIG.website}/">← ${admin?'На публичный сайт':'На главную'}</a><div class="auth-form-wrap"><span class="eyebrow">${recover?'ВОССТАНОВЛЕНИЕ':register?'ПРИСОЕДИНИТЬСЯ':'ДОБРО ПОЖАЛОВАТЬ'}</span><h2>${recover?'Забыл пароль?':register?'Создать аккаунт':admin?'Войти в командный центр':'Войти в Backstage'}</h2><p class="muted">${recover?'Отправим ссылку для установки нового пароля.':register?'Укажи основные данные. Профиль и документы можно заполнить после входа.':'Используй email, с которым зарегистрирован в SCG.'}</p><form id="auth-form" data-mode="${esc(mode)}" data-admin="${admin}">
+    ${register?'<div class="form-grid"><label>Имя<input name="first_name" autocomplete="given-name" required maxlength="80"></label><label>Фамилия<input name="last_name" autocomplete="family-name" required maxlength="80"></label></div><label>Город<input name="city" autocomplete="address-level2" required maxlength="100" placeholder="Например, Астана"></label><label>Регион SCG<select name="region" required><option value="">Выбери регион</option><option value="Север">Север</option><option value="Юг">Юг</option><option value="Запад">Запад</option><option value="Восток">Восток</option><option value="Центр">Центр</option></select></label>':''}
+    <label>Email<input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com"></label>
+    ${!recover?`<label>Пароль<div class="password-field"><input name="password" type="password" autocomplete="${register?'new-password':'current-password'}" required ${register?'minlength="10"':''} maxlength="200"><button type="button" data-action="toggle-password" aria-label="Показать пароль">${icon('eye')}</button></div></label>`:''}
+    ${register?'<label class="check-label"><input name="consent" type="checkbox" required><span>Принимаю <a href="/#terms" target="_blank" rel="noopener">условия использования</a> и <a href="/#privacy" target="_blank" rel="noopener">политику конфиденциальности</a>.</span></label>':''}
+    <p class="form-error" id="auth-error" role="alert">${auth.error?esc(errorText(auth.error)):""}</p><button class="btn primary full" type="submit">${recover?'Отправить ссылку':register?'Создать аккаунт':'Войти'} ${icon('arrow')}</button>
+    </form>${!recover&&!admin&&!CONFIG.emailOtpEnabled?'<p class="form-hint">Вход по коду пока недоступен. Используй пароль.</p>':''}${!recover&&!admin?`<div class="auth-oauth"><p class="form-hint">или</p><button type="button" class="btn secondary full" data-action="google-login" ${CONFIG.googleOAuthEnabled?'':'disabled'}>Войти через Google</button><p class="form-hint">${CONFIG.googleOAuthEnabled?'Google передаст SCG имя и email. Для командного центра по-прежнему нужна назначенная роль.':'Вход через Google пока недоступен.'}</p></div>`:""}<div class="auth-links">${recover?'<a href="#login">Вернуться ко входу</a>':register?'<span>Уже в SCG? <a href="#login">Войти</a></span>':`<a href="#forgot">Забыл пароль</a>${admin?'':'<a href="#register">Создать аккаунт</a>'}`}</div><div class="auth-security">${icon('lock')} Защищённое соединение · Supabase Auth</div></div></div></div>`;
+}
+export async function submitAuth(form, admin = false) {
+  if(form.dataset.otp==='true')return submitEmailOtp(form);
+  const data=new FormData(form), mode=form.dataset.mode, out=$('#auth-error');out.textContent='';
+  auth.formBusy=true;auth.error=null;
+  try {
+  await busy($('button[type=submit]',form),async()=>{
+    try{
+      if(!auth.client)throw new Error('network');
+      const email=String(data.get('email')||'').trim();
+      if(mode==='forgot'){
+        const r=await auth.client.auth.resetPasswordForEmail(email,{redirectTo:`${CONFIG.website}/reset-password.html`});if(r.error)throw r.error;
+        form.innerHTML=`<div class="success-panel">${icon('mail')}<h3>Проверь почту</h3><p>Если аккаунт с этим email существует, придёт письмо со ссылкой. Проверь также папку «Спам».</p><a class="btn secondary" href="#login">Вернуться ко входу</a></div>`;
+        return;
+      }
+      const password=String(data.get('password')||'');
+      if(mode==='register'){
+        if(!data.get('consent')||password.length<10)throw new Error('weak password');
+        const r=await auth.client.auth.signUp({email,password,options:{emailRedirectTo:`${CONFIG.website}/backstage/`,data:{first_name:String(data.get('first_name')).trim(),last_name:String(data.get('last_name')).trim(),city:String(data.get('city')).trim(),region:String(data.get('region')||''),language:getLanguage()==='kk'?'kz':getLanguage(),theme:document.documentElement.dataset.theme==='dark'?'dark':'light',consent_accepted_at:new Date().toISOString()}}});
+        if(r.error)throw r.error;
+        if(!r.data.session){form.innerHTML='<div class="success-panel"><h3>Подтверди email</h3><p>Открой ссылку из письма, затем войди в Backstage.</p><a class="btn primary" href="#login">Войти</a></div>';return;}
+        auth.session=r.data.session;
+      }else{
+        const r=await auth.client.auth.signInWithPassword({email,password});if(r.error)throw r.error;auth.session=r.data.session;
+      }
+      await loadProfile();
+      if(mode==='register'&&auth.profile?.role==='VOLUNTEER'&&Object.hasOwn(REGIONS,String(data.get('region')||''))){await result(auth.client.from('profiles').update({region:String(data.get('region'))}).eq('id',auth.session.user.id));await loadProfile();}
+      await checkMfa();
+      if(auth.mfaRequired){auth.formBusy=false;observer('MFA_REQUIRED');return;}
+      if(admin){if(!canAdmin()){out.textContent='Аккаунт не имеет доступа к командному центру. Backstage доступен на основном сайте.';return;}observer('SIGNED_IN');}
+      else finishLogin();
+    }catch(e){out.textContent=errorText(e);}
+  });
+  } finally {auth.formBusy=false;}
+}
+export async function signInGoogle(button, admin=false) {
+  const out=$('#auth-error');if(out)out.textContent='';auth.formBusy=true;auth.error=null;
+  try {
+    await busy(button,async()=>{
+      if(!CONFIG.googleOAuthEnabled)throw new Error('Вход через Google пока недоступен.');
+      if(!auth.client)throw new Error('network');
+      const r=await auth.client.auth.signInWithOAuth({provider:'google',options:{redirectTo:admin?`${CONFIG.admin}/`:`${CONFIG.website}/backstage/`,scopes:'openid email profile',queryParams:{prompt:'select_account'}}});
+      if(r.error)throw r.error;
+    });
+  }catch(e){if(out)out.textContent=errorText(e);}finally{auth.formBusy=false;}
+}
+export function mfaLoginCard(){return `<div class="recovery-layout"><a class="brand" href="/"><span>SCG</span><small>BACKSTAGE</small></a><section class="recovery-card"><span class="eyebrow">ДВУХЭТАПНЫЙ ВХОД</span><h1>Подтверди, что это ты.</h1><p>Введи код из приложения аутентификатора. Пароль уже проверен.</p><form id="mfa-login-form"><label>Аутентификатор<select name="factor">${auth.factors.map(f=>`<option value="${esc(f.id)}">${esc(f.friendly_name||'Аутентификатор')}</option>`).join('')}</select></label><label>Одноразовый код<input name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code"></label><p class="form-error" id="mfa-login-error" role="alert"></p><button class="btn primary full" type="submit">Подтвердить ${icon('shield')}</button></form><button class="text-link" data-action="logout">Выйти из аккаунта</button></section></div>`;}
+export async function submitMfaLogin(form){await busy($('button[type=submit]',form),async()=>{try{const d=new FormData(form),r=await auth.client.auth.mfa.challengeAndVerify({factorId:String(d.get('factor')),code:String(d.get('code'))});if(r.error)throw r.error;const s=await auth.client.auth.getSession();auth.session=s.data.session;await checkMfa();if(auth.mfaRequired)throw new Error('MFA incomplete');if(!auth.recovery)await loadProfile();observer('MFA_VERIFIED');}catch{$('#mfa-login-error').textContent='Код не совпадает. Используй текущий код из приложения.';}});}
+export function recoveryCard() {
+  const valid=auth.session&&recoveryVerified&&!auth.error;
+  return `<div class="recovery-layout"><a class="brand" href="/"><span>SCG</span><small>BACKSTAGE</small></a><div class="recovery-card"><span class="eyebrow">БЕЗОПАСНОСТЬ АККАУНТА</span><h1>${valid?'Новый пароль.':'Восстановление доступа.'}</h1>${valid?`<p>Установи новый пароль. Эта страница останется открытой до завершения.</p><form id="recovery-form"><label>Новый пароль<input type="password" name="password" minlength="10" maxlength="200" autocomplete="new-password" required></label><label>Повтори пароль<input type="password" name="repeat" minlength="10" maxlength="200" autocomplete="new-password" required></label><p class="form-error" id="recovery-error" role="alert"></p><button type="submit" class="btn primary full">Сохранить пароль ${icon('check')}</button></form>`:`<p>${auth.error?'Ссылка устарела или не подтверждена. Запроси новое письмо.':'Для смены пароля открой новую ссылку из письма.'}</p><a class="btn primary" href="/backstage/#forgot">Запросить ссылку ${icon('arrow')}</a>`}<p class="small muted">Пароль должен содержать не менее 10 символов.</p></div></div>`;
+}
+export async function submitRecovery(form) {
+  const d=new FormData(form),out=$('#recovery-error');out.textContent='';
+  if(d.get('password')!==d.get('repeat')){out.textContent='Пароли не совпадают.';return;}
+  if(!recoveryVerified||!auth.session){out.textContent='Запроси новую ссылку для восстановления.';return;}
+  await busy($('button[type=submit]',form),async()=>{
+    try {
+      await result(auth.client.auth.updateUser({password:String(d.get('password'))}));
+      history.replaceState(null,'',location.pathname);
+      // Finish on a visible success state; never let an auth event route to the homepage.
+      auth.recovery=false;recoveryVerified=false;
+      form.innerHTML='<div class="success-panel"><h3>Пароль обновлён</h3><p>Теперь можно войти с новым паролем.</p><a class="btn primary full" href="/backstage/#login">Перейти ко входу</a></div>';
+      await auth.client.auth.signOut({scope:'local'});
+    }catch(e){out.textContent=errorText(e);}
+  });
+}
+export async function logout() { if(auth.client){const r=await auth.client.auth.signOut({scope:'local'});if(r.error)throw r.error;}auth.session=null;auth.profile=null;location.assign(location.hostname==='admin.stagecraft.kz'?'/':location.pathname.startsWith('/mini/')?'/mini/#login':'/backstage/#login'); }
+export function togglePassword(button) { const input=button.closest('.password-field').querySelector('input');input.type=input.type==='password'?'text':'password';button.setAttribute('aria-label',input.type==='password'?'Показать пароль':'Скрыть пароль'); }
+
+function emailOtpCard(mode){
+ const register=mode==='register';
+ if(auth.otp&&auth.otp.purpose!==mode)auth.otp=null;
+ const pending=auth.otp,loc=savedLocation();
+ const regionOptions=Object.keys(REGIONS).map(r=>`<option value="${esc(r)}" ${loc?.region===r?'selected':''}>${esc(regionName(r,getLanguage()))}</option>`).join('');
+ return `<div class="auth-layout"><div class="auth-intro"><span class="eyebrow">SCG / BACKSTAGE</span><h1>Твоё место<br>в команде.</h1><p>Проекты, команда и твоя история участия — в одном пространстве.</p></div><section class="auth-panel"><div class="auth-form-wrap"><h2>${register?'Создать аккаунт':'Войти в Backstage'}</h2><p>${pending?'Код отправлен. Проверь почту и папку «Спам».':'Код на почту'}</p><form id="auth-form" data-mode="${mode}" data-otp="true">
+ ${pending?`<p data-no-translate>${esc(pending.email)}</p><label>Код из письма<input class="otp-code" name="code" inputmode="numeric" pattern="[0-9]{6,10}" minlength="6" maxlength="10" autocomplete="one-time-code" required></label>`:`${register?`<div class="form-grid"><label>Имя<input name="first_name" autocomplete="given-name" maxlength="80" required></label><label>Фамилия<input name="last_name" autocomplete="family-name" maxlength="80" required></label></div><label>Город<input name="city" value="${esc(loc?.city||'')}" autocomplete="address-level2" maxlength="100" required></label><label>Регион SCG<select name="region" required><option value="">Выбери регион</option>${regionOptions}</select></label>`:''}<label>Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label>${register?'<label class="check-label"><input type="checkbox" name="consent" required><span>Принимаю <a href="/#terms" target="_blank" rel="noopener">условия использования</a> и <a href="/#privacy" target="_blank" rel="noopener">политику конфиденциальности</a>.</span></label>':''}`}
+ <p id="auth-error" class="form-error" role="alert"></p><button type="submit" class="btn primary full">${pending?'Подтвердить код':'Отправить код'}</button></form>
+ ${pending?'<div class="auth-links"><button class="text-link" data-action="otp-resend">Отправить повторно</button><button class="text-link" data-action="otp-reset">Изменить email</button></div>':`${CONFIG.googleOAuthEnabled?'<div class="auth-oauth"><p>или</p><button class="btn secondary full" data-action="google-login">Войти через Google</button></div>':''}<div class="auth-links"><a href="#${register?'login':'register'}">${register?'Войти':'Создать аккаунт'}</a></div>`}</div></section></div>`;
+}
+async function sendEmailOtp(pending){
+ const response=await auth.client.auth.signInWithOtp({email:pending.email,options:{shouldCreateUser:pending.purpose==='register',...(pending.metadata?{data:pending.metadata}:{}),emailRedirectTo:CONFIG.website+'/backstage/'}});
+ if(response.error)throw response.error;
+ pending.sentAt=Date.now();auth.otp=pending;
+}
+export async function resendEmailOtp(button){
+ const out=$('#auth-error');if(!auth.otp)return;
+ if(Date.now()-auth.otp.sentAt<60000){out.textContent=text('Повторная отправка доступна через минуту.');return;}
+ auth.formBusy=true;try{await busy(button,()=>sendEmailOtp(auth.otp));out.textContent=text('Код отправлен. Проверь почту и папку «Спам».');}catch(e){out.textContent=errorText(e);}finally{auth.formBusy=false;}
+}
+export function resetEmailOtp(){auth.otp=null;observer('OTP_RESET');}
+async function submitEmailOtp(form){
+ const data=new FormData(form),out=$('#auth-error');out.textContent='';auth.formBusy=true;let rerender=false;
+ try{await busy($('button[type=submit]',form),async()=>{
+  if(!auth.client)throw Error('network');
+  if(!auth.otp){
+   const email=String(data.get('email')||'').trim();const register=form.dataset.mode==='register';
+   if(!email||email.length>254)throw Error('EMAIL_INVALID');
+   const pending={email,purpose:form.dataset.mode};
+   if(register){if(!data.has('consent'))throw Error('CONSENT_REQUIRED');const region=String(data.get('region')||'');if(!Object.hasOwn(REGIONS,region))throw Error('REGION_REQUIRED');pending.metadata={first_name:String(data.get('first_name')||'').trim().slice(0,80),last_name:String(data.get('last_name')||'').trim().slice(0,80),city:String(data.get('city')||'').trim().slice(0,100),region,language:getLanguage()==='kk'?'kz':getLanguage(),theme:document.documentElement.dataset.theme==='dark'?'dark':'light',consent_accepted_at:new Date().toISOString()};}
+   await sendEmailOtp(pending);rerender=true;return;
+  }
+  const pending=auth.otp,token=String(data.get('code')||'').trim();if(!/^[0-9]{6,10}$/.test(token))throw Error('OTP_INVALID');
+  const r=await auth.client.auth.verifyOtp({email:pending.email,token,type:'email'});if(r.error)throw r.error;
+  if(!r.data.session)throw Error('OTP_INVALID');auth.session=r.data.session;auth.otp=null;await loadProfile();await checkMfa();
+  if(auth.mfaRequired){rerender=true;return;}
+  if(pending.metadata&&auth.profile?.role==='VOLUNTEER'){const patch={city:pending.metadata.city,region:pending.metadata.region};if(!auth.profile.first_name)patch.first_name=pending.metadata.first_name;if(!auth.profile.last_name)patch.last_name=pending.metadata.last_name;await result(auth.client.from('profiles').update(patch).eq('id',auth.session.user.id));await loadProfile();}
+  finishLogin();
+ });}catch(e){out.textContent=/OTP_INVALID|expired|invalid.*token|token.*invalid/i.test(e.message)?text('Код неверный или истёк. Запроси новый.'):errorText(e);}finally{auth.formBusy=false;if(rerender)observer('OTP_STEP');}
+}
+window.addEventListener('pagehide',()=>{auth.otp=null;});
+
+function finishLogin(){let target=location.pathname.startsWith('/mini/')?'/mini/':'/backstage/';try{const saved=sessionStorage.getItem('scg-return-to');sessionStorage.removeItem('scg-return-to');if(/^\/(mini|backstage)\/(?:#[a-z-]+)?$/.test(saved||''))target=saved}catch{}location.assign(CONFIG.website+target)}

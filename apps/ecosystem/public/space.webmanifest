@@ -1,0 +1,41 @@
+{
+  "id": "/space",
+  "name": "SPACE — Stage Craft Group",
+  "short_name": "SPACE",
+  "start_url": "/#/space",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#e8e9ee",
+  "theme_color": "#e8e9ee",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "/pwa-icons/space.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-icons/space-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa-icons/space-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Проекты",
+      "url": "/#/space/discover"
+    },
+    {
+      "name": "SCG ID",
+      "url": "/#/space/id"
+    }
+  ]
+}
