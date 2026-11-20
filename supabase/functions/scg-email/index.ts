@@ -1,3 +1,4 @@
+import {emailTemplate} from './template.ts';
 import nodemailer from 'npm:nodemailer@10.1.0';
 import {reply,originAllowed,identity,clients,body,unwrap,failure} from '../_shared/security.ts';
 const escape=value=>String(value||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -25,7 +26,7 @@ Deno.serve(async req=>{
     if(!profile||!field||!profile[field]||!email||!account.data.user?.email_confirmed_at||account.error){unwrap(await admin.from('scg_email_outbox').update({status:'skipped',last_error:null}).eq('id',job.id));skipped++;continue;}
     const destination=new URL(job.payload?.url||'https://stagecraft.kz/backstage/');if(destination.protocol!=='https:'||destination.hostname!=='stagecraft.kz')throw Error('UNSAFE_URL');
     const title=String(job.payload?.title||'SCG Backstage').slice(0,300),text=String(job.payload?.body||'Новое уведомление в Backstage.').slice(0,6000),subject=String(job.subject||title).replace(/[\r\n]/g,' ').slice(0,200);
-    await transport.sendMail({from:{name:'SCG · Backstage',address:from},to:email,subject,messageId:`<scg-${job.id}@stagecraft.kz>`,text:`${title}\n\n${text}\n\n${destination.href}\n\nНастройки email: https://stagecraft.kz/backstage/#settings`,html:`<div style="font:16px Arial,sans-serif;max-width:600px;margin:auto;color:#1d2028"><p style="font-weight:bold;color:#d72732">SCG / BACKSTAGE</p><h1 style="font-size:26px">${escape(title)}</h1><p style="white-space:pre-line">${escape(text)}</p><p><a href="${escape(destination.href)}">Открыть Backstage →</a></p><hr><p style="font-size:12px">Ты получаешь это письмо по настройкам уведомлений SCG. <a href="https://stagecraft.kz/backstage/#settings">Изменить настройки</a></p></div>`});
+    await transport.sendMail({from:{name:'Stage Craft Group',address:from},to:email,subject,messageId:`<scg-${job.id}@stagecraft.kz>`,text:`${title}\n\n${text}\n\n${destination.href}\n\nНастройки email: https://stagecraft.kz/backstage/#settings`,html:emailTemplate(title,text,destination.href,job.kind)});
     unwrap(await admin.from('scg_email_outbox').update({status:'sent',sent_at:new Date().toISOString(),last_error:null}).eq('id',job.id));sent++;
    }catch{failed++;unwrap(await admin.from('scg_email_outbox').update({status:job.attempts>=5?'failed':'queued',available_at:new Date(Date.now()+Math.min(3600000,60000*2**job.attempts)).toISOString(),last_error:'SMTP_DELIVERY_FAILED'}).eq('id',job.id));}
   }
